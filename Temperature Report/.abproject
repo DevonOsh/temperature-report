@@ -1,0 +1,45 @@
+{
+  "ProjectName": "Temperature Report",
+  "ProjectGuid": "08b34060-26c2-4c18-bcd3-98f54eb79a5f",
+  "projectVersion": 1,
+  "AppIdentifier": "com.telerik.TemperatureReport",
+  "DisplayName": "Temperature Report",
+  "Author": "",
+  "Description": "Temperature Report",
+  "BundleVersion": "1.0",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "FrameworkVersion": "4.0.0",
+  "AndroidPermissions": [
+    "android.permission.INTERNET"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "true",
+  "iOSStatusBarStyle": "Default",
+  "Framework": "Cordova",
+  "WP8TileTitle": "",
+  "WP8Publisher": "",
+  "WP8Capabilities": [
+    "ID_CAP_NETWORKING",
+    "ID_CAP_WEBBROWSERCOMPONENT"
+  ],
+  "WP8Requirements": [],
+  "WP8PublisherID": "{b065b51d-d366-4a8e-b8b4-e44220376818}",
+  "WP8ProductID": "{f98445e9-f15d-46e7-acd6-9920b21341ba}",
+  "WPSdk": "8.0",
+  "WP8PackageIdentityName": "1234Telerik.TemperatureReport",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8SupportedResolutions": [
+    "ID_RESOLUTION_WVGA",
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
+  ]
+}
