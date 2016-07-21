@@ -1,0 +1,22 @@
+<div data-role="view" data-title="Login" data-layout="views-layout" data-model="app.loginViewModel">
+    <div class="signin-view">
+        <form>
+            <ul data-role="listview" data-style="inset">
+                <li>
+                    <label>Username
+                        <input type="text" data-bind="value: userName" required autofocus>
+                    </label>
+                </li>
+                <li>
+                    <label>Password
+                        <input type="password" data-bind="value: password" required>
+                    </label>
+                </li>
+            </ul>
+
+            <div class="button-group button-group-vertical">
+                <a data-role="button" class="primary" data-bind="events: { click: signin }">Sign In</a>
+            </div>
+        </form>
+    </div>
+</div>
