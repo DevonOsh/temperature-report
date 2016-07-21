@@ -1,0 +1,24 @@
+<div data-role="view" id="tempInputView" data-title="Input Temp" data-layout="main-layout" data-show="app.tempInput.onShow">
+    <div id="inputContent">
+        <h2>Location Info</h2>
+        <div id="resultListView">
+        </div>
+        <label for="tempInput">Enter the current temp: </label>
+        <input id="tempInput" type="text" pattern="[0-9]*"></input>
+        <button id="ok-button" data-role="button">OK</button>
+    	<button id="cancel-button" data-role="button">Cancel</button>
+    </div>
+    <div id="infoSubmitted" data-role="modalview" data-popup='{"height": "500", "width":"300"}'>
+        <h3>
+            Submitted Info
+        </h3>
+        <div id="sentListView">
+        </div>
+        <button data-role="button" id="success-ok-btn">
+            OK
+        </button>
+    </div>
+    <div id="rangeWarning" data-role="modalview">
+        
+    </div>
+</div>
