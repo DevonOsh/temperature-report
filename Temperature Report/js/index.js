@@ -14,15 +14,15 @@
  		);
     });
     
-    var JSDOSettings = {
+    app.JSDOSettings = {
         "serviceURI": "http://10.0.1.239:8810/Temp_Report",
         "catalogURIs": "http://10.0.1.239:8810/Temp_Report/static/Temp_ReportService.json",
         "authenticationModel": "anonymous"
     };
     
     app.JSDOSession = new progress.data.Session();
-    app.JSDOSession.login(JSDOSettings.serviceURI);
-    app.JSDOSession.addCatalog(JSDOSettings.catalogURIs);
+    app.JSDOSession.login(app.JSDOSettings.serviceURI);
+    app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
     
     app.locJSDO = new progress.data.JSDO({
         name: "Temp_Loc"
@@ -38,7 +38,7 @@
     })
     
     app.sendReport= function (reportModel) {
-            app.JSDOSession.addCatalog(JSDOSettings.catalogURIs);
+            app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
 
             app.reportJSDO.create(reportModel);
             app.reportJSDO.saveChanges();

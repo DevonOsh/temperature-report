@@ -38,7 +38,6 @@
         
         <script type="text/javascript" src="js/index.js"></script>
         <script src="components/login/login.js"></script>
-        <script src="components/tempGrid/tempGrid.js"></script>
         <script src="components/barcodeScan/barcodeScan.js"></script>
         <script src="components/tempInput/tempInput.js"></script>
         
@@ -47,7 +46,7 @@
     <body id="body">
             <div data-role="view"></div>
             
-            <!--Layout-->
+            <!--Main Layout-->
             <div data-role="layout" data-id="views-layout">
                 <!--Header-->
                 <div data-role="header">
@@ -59,13 +58,26 @@
                 <!--Footer-->
             	<div data-role="footer">
             	    <div data-role="tabstrip">
-            	        <a href="components/login/loginView.html" data-icon="home">Login</a>
                         <a href="components/barcodeScan/barcodeScanView.html" data-icon="organize">Scan</a>
                         <a href="components/tempInput/tempInputView.html" data-icon="info">Input</a>
-                        <a href="components/tempGrid/tempGridView.html" data-icon="info">Grid</a>
             	    </div>
             	</div>
             </div>
-            
+        
+        
+            <!--Login Layout-->
+            <div data-role="layout" data-id="login-layout">
+                <!--Header-->
+                <div data-role="header">
+                    <div data-role="navbar">
+                        <span data-role="view-title"></span>
+                    </div>
+                </div>
+                
+                <!--Footer-->
+            	<div data-role="footer">
+            	    
+            	</div>
+            </div>
     </body>
 </html>

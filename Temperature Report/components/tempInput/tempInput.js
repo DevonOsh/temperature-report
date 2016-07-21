@@ -60,6 +60,7 @@
 
                 app.tempInput.buildModel(locationID, locationName, enteredTemp, inRange);
                 app.sendReport(reportModel);
+                app.goToScan();
             });
         },
         //build the model to be sent to OE
@@ -76,7 +77,7 @@
                 locationName = locationName,
                 temp = tempInput,
                 inRange = inRange,
-                employee = "Devon",
+                employee = app.userInfo.userName,
                 date = formatDate,
                 time = currentTime;
 
@@ -95,38 +96,6 @@
                 reportModel.EMPLOYEE + "\n" +
                 reportModel.STAMP_DT + "\n" +
                 reportModel.STAMP_TM);
-        },
-        openSubmitModal: function () {
-            $("sentListView").kendoListView({
-                dataSource: {
-                    data: [
-                        {
-                            id: reportModel.LOCATION_ID,
-                            name: reportModel.LOCATION_NAME,
-                            temp: reportModel.TEMP,
-                            inRange: reportModel.IN_RANGE,
-                            emp: reportModel.EMPLOYEE,
-                            date: reportModel.STAMP_DT,
-                            time: reportModel.STAMP_TM
-                        }
-                    ]
-                },
-                template: 
-                    "<p>Location ID: #:id#</p>" +
-                    "<p>Location ID: #:id#</p>" +
-                    "<p>Location Name: #:name#</p>" +
-                    "<p>Temperature: #:temp#</p>" +
-                    "<p>In Range?: #:inRange#</p>" +
-                    "<p>Employee: #:emp#</p>" +
-                    "<p>Date: #:date#</p>" +
-                    "<p>Time: #:time#</p>"                
-            });
-            $("#infoSubmitted").data("kendoMobileModalView").open();
-            $("#success-ok-btn").kendoButton({
-                click: function () {
-                    $("#infoSubmitted").data("kendoMobileModalView").close();
-                }
-            });
         }
     }
 })(window, jQuery);

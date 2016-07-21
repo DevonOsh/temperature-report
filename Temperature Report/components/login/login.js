@@ -2,7 +2,7 @@
     var loginViewModel,
         app = temp.app = temp.app || {};
 
-    app.user = {
+    app.userInfo = {
         firstName: "",
         lastName: "",
         userName: ""
@@ -24,6 +24,10 @@
 
             return true;
         },
+        onShow: function() {
+            app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
+            app.loginJSDO.fill();
+        },
         signin: function () {
             var model = app.loginViewModel,
                 userName = model.userName,
@@ -33,36 +37,27 @@
                 return false;
             }
 
-            //app.loginJSDO.fill();
+            var user;
 
-            var loginDataSource = new kendo.data.DataSource({
-                type: "jsdo",
-                serverFiltering: false,
-                serverSorting: false,
-                transport: {
-                    jsdo: app.loginJSDO
-                },
-                error: function (e) {
-                    console.log("Error: ", e);
-                },
-                filter: {
-                    field: "USERNAME",
-                    operator: "eq",
-                    value: userName
-                }
-            });
+            user = app.loginJSDO.find(function (jsrecord) {
+                        return (jsrecord.data.USERNAME == userName);
+                    });
 
-            var view = loginDataSource.view(),
-                USERNAME = view[0].USERNAME,
-                PASSWORD = view[0].PASSWORD;
-            alert("Username: " + USERNAME + "\n" +
-                "Password: " + PASSWORD);
-
-            if ((USERNAME === userName) && (PASSWORD === password)) {
-                return true;
-                var user = app.user;
+            console.log(user.data.USERNAME);
+            
+			var USERNAME = user.data.USERNAME,
+                PASSWORD = user.data.PASSWORD
+            
+            if ((USERNAME == userName) && (PASSWORD == password)) {
+                app.userInfo.firstName = user.data.FIRST_NAME;
+                app.userInfo.lastName = user.data.LAST_NAME;
+                app.userInfo.userName = USERNAME;
                 app.goToScan();
             }
+            else
+                {
+                    alert("Login failed!")
+                }
         }
     });
 
