@@ -22,21 +22,50 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        
+        <link rel="stylesheet" type="text/css" href="css/kendo.mobile.all.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/kendo.flat.mobile.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/kendo.dataviz.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/kendo.dataviz.flat.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/kendo.all.min.js"></script>
+        <script type="text/javascript" src="js/kendo.grid.min.js"></script>
+        
+        <script src="lib/progress.all.min.js"></script>
+        
+        <script type="text/javascript" src="js/index.js"></script>
+        <script src="components/login/login.js"></script>
+        <script src="components/tempGrid/tempGrid.js"></script>
+        <script src="components/barcodeScan/barcodeScan.js"></script>
+        <script src="components/tempInput/tempInput.js"></script>
+        
         <title>Hello World!</title>
     </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+    <body id="body">
+            <div data-role="view"></div>
+            
+            <!--Layout-->
+            <div data-role="layout" data-id="views-layout">
+                <!--Header-->
+                <div data-role="header">
+                    <div data-role="navbar">
+                        <span data-role="view-title"></span>
+                    </div>
+                </div>
+                
+                <!--Footer-->
+            	<div data-role="footer">
+            	    <div data-role="tabstrip">
+            	        <a href="components/login/loginView.html" data-icon="home">Login</a>
+                        <a href="components/barcodeScan/barcodeScanView.html" data-icon="organize">Scan</a>
+                        <a href="components/tempInput/tempInputView.html" data-icon="info">Input</a>
+                        <a href="components/tempGrid/tempGridView.html" data-icon="info">Grid</a>
+            	    </div>
+            	</div>
             </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+            
     </body>
 </html>
