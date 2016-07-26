@@ -39,31 +39,48 @@
                 template: "<h4>Location Name: #:LOC_NAME#</h4>" +
                     "<h4>Location Code: #:LOC_CODE#</h4>"
             });
-            
-            $("#tempInput").kendoNumericTextBox();
-            
+
             //Create the model and save the changes to the db
             $("#ok-button").click(function () {
                 var view = locDataSource.view(),
-                    locationID = view[0].LOC_ID,
-                    locationName = view[0].LOC_NAME,
+                    //    locationID = view[0].LOC_ID,
+                    //    locationName = view[0].LOC_NAME,
                     minTemp = view[0].TEMP_MIN,
                     highTemp = view[0].TEMP_MAX,
                     enteredTemp = $("#tempInput").val(),
                     inRange;
 
-                if (enteredTemp <= highTemp)
-                    inRange = true;
-                else
-                    inRange = false;
+                try {
+                    var isNumber = $.isNumeric(enteredTemp);
+                    if (!isNumber)
+                        throw new Error("Please enter a number.");
+                    if (enteredTemp > 100)
+                        throw new Error("Enter a valid temperature.");
+                    if (enteredTemp < -70)
+                        throw new Error("Enter a valid temperature.");
+                    if ((enteredTemp <= (highTemp + 5)) && (enteredTemp >= (minTemp - 5)))
+                        inRange = true;
+                    else
+                        inRange = false;
 
-                app.tempInput.buildModel(locationID, locationName, enteredTemp, inRange);
-                app.sendReport(reportModel);
-                app.goToScan();
+                    app.tempInput.buildModel(view, enteredTemp, inRange);
+                    app.sendReport(reportModel);
+                    app.goToScan();
+
+                } catch (exception) {
+                    alert(exception.message);
+                }
+
+                //app.tempInput.buildModel(locationID, locationName, enteredTemp, inRange);
+                //app.tempInput.buildModel(view, enteredTemp, inRange);
+                //app.sendReport(reportModel);
+                //app.goToScan();
             });
+
         },
         //build the model to be sent to OE
-        buildModel: function (locationID, locationName, tempInput, inRange) {
+        buildModel: function (data, temp, range) {
+            //original params for function: locationID, locationName, tempInput, inRange
             var currentDate = new Date(),
                 yyyy = currentDate.getFullYear(),
                 mm = currentDate.getMonth() + 1,
@@ -72,21 +89,21 @@
                 dateString = currentDate.toString(),
                 currentTime = dateString.substring(16, 21);
 
-            var locationID = locationID,
-                locationName = locationName,
-                temp = tempInput,
-                inRange = inRange,
-                employee = app.userInfo.userName,
-                date = formatDate,
-                time = currentTime;
+            //var locationID = locationID,
+            //    locationName = locationName,
+            //    temp = tempInput,
+            //    inRange = inRange,
+            //    employee = app.userInfo.userName,
+            //    date = formatDate,
+            //    time = currentTime;
 
-            reportModel.LOCATION_ID = locationID;
-            reportModel.LOCATION_NAME = locationName;
+            reportModel.LOCATION_ID = data[0].LOC_ID;
+            reportModel.LOCATION_NAME = data[0].LOC_NAME;
             reportModel.TEMP = temp;
-            reportModel.IN_RANGE = inRange;
-            reportModel.EMPLOYEE = employee;
-            reportModel.STAMP_DT = date;
-            reportModel.STAMP_TM = time;
+            reportModel.IN_RANGE = range;
+            reportModel.EMPLOYEE = app.userInfo.userName;
+            reportModel.STAMP_DT = formatDate;
+            reportModel.STAMP_TM = currentTime;
 
             alert(reportModel.LOCATION_ID + "\n" +
                 reportModel.LOCATION_NAME + "\n" +
