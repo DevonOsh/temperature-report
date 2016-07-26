@@ -71,8 +71,5 @@
             app.goToLogin();
         }
     });
-    app.failureViewModel = kendo.observable({
-        onShow: function () {}
-    });
 
 })(window, jQuery);

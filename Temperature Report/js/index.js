@@ -51,4 +51,7 @@
     app.goToScan = function () {
         application.navigate("components/barcodeScan/barcodeScanView.html", "slide");
     }
+    app.goToScanFail = function() {
+        application.navigate("components/barcodeScan/scanFailView.html", "slide");
+    }
 })(window);
