@@ -40,8 +40,7 @@
                     "<h4>Location Code: #:LOC_CODE#</h4>"
             });
             
-           //Also removed the cordova keyboard function to test rollback
-            
+            $("#tempInput").kendoNumericTextBox();
             
             //Create the model and save the changes to the db
             $("#ok-button").click(function () {

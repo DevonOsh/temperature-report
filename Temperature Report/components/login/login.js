@@ -58,10 +58,15 @@
                 {
                     alert("Login failed!")
                 }
+        },
+        logout: function() {
+            app.loginViewModel.userName = '';
+            app.loginViewModel.password = '';
+            app.goToLogin();
         }
     });
     app.failureViewModel = kendo.observable({
-        
+        onShow: function() {}
     });
 
 })(window, jQuery);
