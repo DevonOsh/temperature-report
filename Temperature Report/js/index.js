@@ -33,8 +33,7 @@
     });
     
     app.reportJSDO = new progress.data.JSDO({
-        name: "Temp_Report",
-        autoFill: false
+        name: "Temp_Report"
     })
     
     app.sendReport= function (reportModel) {

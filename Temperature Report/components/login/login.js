@@ -60,5 +60,8 @@
                 }
         }
     });
+    app.failureViewModel = kendo.observable({
+        
+    });
 
 })(window, jQuery);
