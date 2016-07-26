@@ -24,7 +24,7 @@
 
             return true;
         },
-        onShow: function() {
+        onShow: function () {
             app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
             app.loginJSDO.fill();
         },
@@ -40,33 +40,39 @@
             var user;
 
             user = app.loginJSDO.find(function (jsrecord) {
-                        return (jsrecord.data.USERNAME == userName);
-                    });
+                return (jsrecord.data.USERNAME == userName);
+            });
 
-            console.log(user.data.USERNAME);
-            
-			var USERNAME = user.data.USERNAME,
-                PASSWORD = user.data.PASSWORD
-            
-            if ((USERNAME == userName) && (PASSWORD == password)) {
-                app.userInfo.firstName = user.data.FIRST_NAME;
-                app.userInfo.lastName = user.data.LAST_NAME;
-                app.userInfo.userName = USERNAME;
-                app.goToScan();
-            }
-            else
-                {
-                    alert("Login failed!")
+            var USERNAME, PASSWORD;
+
+            try {
+                if (user == null)
+                    throw new Error("Invalid Username");
+                else {
+                    USERNAME = user.data.USERNAME,
+                	PASSWORD = user.data.PASSWORD
                 }
+                if (!(PASSWORD == password))
+                    throw new Error("Invalid Password");
+                if ((USERNAME == userName) && (PASSWORD == password)) {
+                    app.userInfo.firstName = user.data.FIRST_NAME;
+                    app.userInfo.lastName = user.data.LAST_NAME;
+                    app.userInfo.userName = USERNAME;
+                    app.goToScan();
+                }
+            } catch (exception) {
+                $("#errorMessage").html("<p>"+exception.message+"</p>");
+                $("#errorMessage").css("visibility", "visible");
+            }
         },
-        logout: function() {
+        logout: function () {
             app.loginViewModel.userName = '';
             app.loginViewModel.password = '';
             app.goToLogin();
         }
     });
     app.failureViewModel = kendo.observable({
-        onShow: function() {}
+        onShow: function () {}
     });
 
 })(window, jQuery);
