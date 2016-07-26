@@ -14,7 +14,6 @@
 
     app.tempInput = {
         onShow: function () {
-            //Testing the Rollback functionality of Github
 
             var locDataSource = new kendo.data.DataSource({
                 type: "jsdo",
@@ -41,10 +40,8 @@
             });
 
             //Create the model and save the changes to the db
-            $("#ok-button").click(function () {
+            $("#ok-button").unbind().click(function () {
                 var view = locDataSource.view(),
-                    //    locationID = view[0].LOC_ID,
-                    //    locationName = view[0].LOC_NAME,
                     minTemp = view[0].TEMP_MIN,
                     highTemp = view[0].TEMP_MAX,
                     enteredTemp = $("#tempInput").val(),
@@ -70,17 +67,11 @@
                 } catch (exception) {
                     alert(exception.message);
                 }
-
-                //app.tempInput.buildModel(locationID, locationName, enteredTemp, inRange);
-                //app.tempInput.buildModel(view, enteredTemp, inRange);
-                //app.sendReport(reportModel);
-                //app.goToScan();
             });
 
         },
         //build the model to be sent to OE
         buildModel: function (data, temp, range) {
-            //original params for function: locationID, locationName, tempInput, inRange
             var currentDate = new Date(),
                 yyyy = currentDate.getFullYear(),
                 mm = currentDate.getMonth() + 1,
@@ -88,14 +79,6 @@
                 formatDate = yyyy + "-" + mm + "-" + dd,
                 dateString = currentDate.toString(),
                 currentTime = dateString.substring(16, 21);
-
-            //var locationID = locationID,
-            //    locationName = locationName,
-            //    temp = tempInput,
-            //    inRange = inRange,
-            //    employee = app.userInfo.userName,
-            //    date = formatDate,
-            //    time = currentTime;
 
             reportModel.LOCATION_ID = data[0].LOC_ID;
             reportModel.LOCATION_NAME = data[0].LOC_NAME;
