@@ -11,11 +11,12 @@
                         jsdo: app.reportJSDO
                     }
                 },
-                pageSize: 10,
+                pageSize: 5,
                 groupable: true,
                 mobile: true,
                 sortable: true,
-                 resizable: true,
+                resizable: true,
+                pageable: true,
                 columns: [
                     {
                         field: "LOCATION_NAME",

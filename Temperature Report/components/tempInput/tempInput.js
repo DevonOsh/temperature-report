@@ -14,7 +14,6 @@
 
     app.tempInput = {
         onShow: function () {
-
             var locDataSource = new kendo.data.DataSource({
                 type: "jsdo",
                 serverFiltering: false,
@@ -42,10 +41,11 @@
             //Create the model and save the changes to the db
             $("#ok-button").unbind().click(function () {
                 var view = locDataSource.view(),
-                    minTemp = view[0].TEMP_MIN,
+                    minTemp = view[0].TEMP_MIN - 5,
                     highTemp = view[0].TEMP_MAX,
                     enteredTemp = $("#tempInput").val(),
                     inRange;
+                alert("High " + highTemp + " Low " + minTemp);
 
                 try {
                     var isNumber = $.isNumeric(enteredTemp);
@@ -55,14 +55,18 @@
                         throw new Error("Enter a valid temperature.");
                     if (enteredTemp < -70)
                         throw new Error("Enter a valid temperature.");
-                    if ((enteredTemp <= (highTemp + 5)) && (enteredTemp >= (minTemp - 5)))
+                    if ((enteredTemp <= highTemp) && (enteredTemp >= minTemp))
                         inRange = true;
                     else
                         inRange = false;
 
                     app.tempInput.buildModel(view, enteredTemp, inRange);
-                    app.sendReport(reportModel);
-                    app.goToScan();
+                    if (inRange) {
+                        app.sendReport(reportModel);
+                        app.goToSubmitSuccess();
+                    }
+                    else
+                        alert("Temp out of range!");
 
                 } catch (exception) {
                     alert(exception.message);
@@ -87,14 +91,28 @@
             reportModel.EMPLOYEE = app.userInfo.userName;
             reportModel.STAMP_DT = formatDate;
             reportModel.STAMP_TM = currentTime;
-
-            alert(reportModel.LOCATION_ID + "\n" +
-                reportModel.LOCATION_NAME + "\n" +
-                reportModel.TEMP + "\n" +
-                reportModel.IN_RANGE + "\n" +
-                reportModel.EMPLOYEE + "\n" +
-                reportModel.STAMP_DT + "\n" +
-                reportModel.STAMP_TM);
         }
     }
+
+    app.successView = {
+        onShow: function () {
+            
+            console.log(reportModel);
+
+            $("#submitListView").kendoListView({
+                dataSource: [reportModel],
+                template: "<h4>Location ID: #:LOCATION_ID#</h4>" +
+                    "<h4>Location Name: #:LOCATION_NAME#</h4>" +
+                    "<h4>Recorded Temp: #:TEMP#</h4>" +
+                    "<h4>Employee: #:EMPLOYEE#</h4>" +
+                    "<h4>Date: #:STAMP_DT#</h4>" +
+                    "<h4>Time: #:STAMP_TM#</h4>"
+            });
+
+            $("#confirm-button").unbind().click(function () {
+                app.goToScan();
+            });
+        }
+    }
+
 })(window, jQuery);

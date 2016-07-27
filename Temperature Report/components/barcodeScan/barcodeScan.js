@@ -10,15 +10,19 @@ var scanResult = 'No results yet';
             cordova.plugins.barcodeScanner.scan(
                 // success callback function
                 function (result) {
-                    scanResult = result.text;
-                    var validLoc = app.locJSDO.find(function (jsrecord) {
-                        return (jsrecord.data.LOC_ID == scanResult);
-                    });
-                    if (validLoc == null) {
-                        alert("Unable to find location on scan");
-                        app.goToScanFail();
-                    } else
-                        app.goToTempInput();
+                    if (result.cancelled > 0)
+                        alert("Scan cancelled");
+                    else {
+                        scanResult = result.text;
+                        var validLoc = app.locJSDO.find(function (jsrecord) {
+                            return (jsrecord.data.LOC_ID == scanResult);
+                        });
+                        if (validLoc == null) {
+                            alert("Unable to find location on scan");
+                            app.goToScanFail();
+                        } else
+                            app.goToTempInput();
+                    }
                 },
                 // error callback function
                 function (error) {
@@ -39,10 +43,14 @@ var scanResult = 'No results yet';
         onShow: function () {
             app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
             app.locJSDO.fill();
+            $("#list-button").unbind().click(function () {
+                app.goToScanFail();
+            });
+
         },
         failViewModel: failViewModel
     }
-    
+
     app.scanFail = {
         onShow: function () {
 
@@ -61,7 +69,7 @@ var scanResult = 'No results yet';
             $("#locDropDown").kendoDropDownList({
                 dataTextField: "LOC_ID",
                 dataSource: dataSource,
-                select: function(e){
+                select: function (e) {
                     var dataItem = this.dataItem(e.item.index());
                     var locID = dataItem.LOC_ID;
                     scanResult = locID;
@@ -69,6 +77,16 @@ var scanResult = 'No results yet';
                 },
                 template: "<h4>Location Name: #:LOC_NAME#</h4>" +
                     "<h4>Location Code: #:LOC_CODE#</h4>"
+            });
+
+            //attempt to add bar-barcode-vale to table on click
+            $("#bad-barcode-button").unbind().click(function () {
+                var locationNum = prompt("Enter the location number: ");
+                var loc;
+                loc = app.locJSDO.find(function (jsrecord) {
+                    return (jsrecord.data.LOC_ID == locationNum);
+                });
+                loc.assign(BARCODE_GOOD == false);
             });
         }
     }
