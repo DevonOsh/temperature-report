@@ -1,6 +1,10 @@
 (function (temp, $) {
     var tempGrid = null,
         app = temp.app = temp.app || {};
+    
+    var windowHeight =  function () { 
+        return $(window).height(); 
+    }
 
     app.tempGrid = {
         onShow: function () {
@@ -11,12 +15,14 @@
                         jsdo: app.reportJSDO
                     }
                 },
-                pageSize: 5,
+                height: windowHeight,
                 groupable: true,
                 mobile: true,
                 sortable: true,
                 resizable: true,
-                pageable: true,
+                scrollable: {
+                    virtual: true
+                },
                 columns: [
                     {
                         field: "LOCATION_NAME",

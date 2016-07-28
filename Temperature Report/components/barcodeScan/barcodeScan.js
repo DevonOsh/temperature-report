@@ -88,6 +88,10 @@ var scanResult = 'No results yet';
                 });
                 loc.assign(BARCODE_GOOD == false);
             });
+            
+            $("#back-to-scan").unbind().click(function () {
+                app.goToScan();
+            });
         }
     }
 })(window, jQuery);
