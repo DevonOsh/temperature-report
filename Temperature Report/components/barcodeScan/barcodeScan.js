@@ -81,18 +81,17 @@ var scanResult = 'No results yet';
             //attempt to add bad-barcode-val to table on click
             $("#bad-barcode-button").unbind().click(function () {
                 var locationNum = prompt("Enter the location number: ");
-                var loc;
-                loc = app.locJSDO.find(function (jsrecord) {
+                var loc,
+                    jsdo = app.locJSDO;
+                loc = jsdo.find(function (jsrecord) {
                     return (jsrecord.data.LOC_ID == locationNum);
                 });
                 console.log(loc);
-                console.log(app.locJSDO.record);
-                app.locJSDO.record.BARCODE_GOOD = false;
-                loc.assign();
-                console.log(loc);
-                app.locJSDO.saveLocal();
-                console.log(app.locJSDO.record)
-                //app.locJSDO.saveChanges();
+                var updateData = {BARCODE_GOOD: false};
+                jsdo.assign(updateData);
+                jsdo.saveLocal();
+                jsdo.saveChanges();
+                jsdo.acceptChanges();
             });
             
             $("#back-to-scan").unbind().click(function () {
