@@ -47,8 +47,7 @@ var scanResult = 'No results yet';
                 app.goToScanFail();
             });
 
-        },
-        failViewModel: failViewModel
+        }
     }
 
     app.scanFail = {
@@ -75,23 +74,32 @@ var scanResult = 'No results yet';
                     scanResult = locID;
                     app.goToTempInput();
                 },
+                popup: {appendTo:body},
                 template: "<h4>Location Name: #:LOC_NAME#</h4>" +
                     "<h4>Location Code: #:LOC_CODE#</h4>"
             });
 
-            //attempt to add bar-barcode-vale to table on click
+            //attempt to add bad-barcode-val to table on click
             $("#bad-barcode-button").unbind().click(function () {
                 var locationNum = prompt("Enter the location number: ");
                 var loc;
                 loc = app.locJSDO.find(function (jsrecord) {
                     return (jsrecord.data.LOC_ID == locationNum);
                 });
-                loc.assign(BARCODE_GOOD == false);
+                console.log(loc);
+                console.log(app.locJSDO.record);
+                app.locJSDO.record.BARCODE_GOOD = false;
+                loc.assign();
+                console.log(loc);
+                app.locJSDO.saveLocal();
+                console.log(app.locJSDO.record)
+                //app.locJSDO.saveChanges();
             });
             
             $("#back-to-scan").unbind().click(function () {
                 app.goToScan();
             });
+            
         }
     }
 })(window, jQuery);

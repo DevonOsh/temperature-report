@@ -26,14 +26,13 @@
         <link rel="stylesheet" type="text/css" href="css/kendo.common.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/kendo.default.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/kendo.mobile.all.min.css"/>
-        <link rel="stylesheet" type="text/css" href="css/kendo.flat.mobile.min.css"/>
+        <!--<link rel="stylesheet" type="text/css" href="css/kendo.flat.mobile.min.css"/>-->
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/kendo.all.min.js"></script>
-        <!--<script type="text/javascript" src="js/kendo.grid.min.js"></script>-->
         
         <script src="progress.all.min.js"></script>
         
@@ -47,6 +46,16 @@
     </head>
     <body id="body">
             <div data-role="view"></div>
+        
+        	<!--Logout Window
+        	<div id="logout-window">
+                <h4>
+                    Are you sure you want to log out?
+                </h4>
+                <button data-role="button" data-click="app.loginViewModel.yesLogout" id="yes-logout-btn">Yes</button>
+                <button data-role="button" data-click="app.loginViewModel.noLogout" id="no-logout-btn">No</button>
+        	</div>
+-->
             
             <!--Main Layout-->
             <div data-role="layout" data-id="views-layout">

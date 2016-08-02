@@ -50,7 +50,7 @@
                     throw new Error("Invalid Username");
                 else {
                     USERNAME = user.data.USERNAME,
-                	PASSWORD = user.data.PASSWORD
+                        PASSWORD = user.data.PASSWORD
                 }
                 if (!(PASSWORD == password))
                     throw new Error("Invalid Password");
@@ -61,14 +61,24 @@
                     app.goToScan();
                 }
             } catch (exception) {
-                $("#errorMessage").html("<p>"+exception.message+"</p>");
+                $("#errorMessage").html("<p>" + exception.message + "</p>");
                 $("#errorMessage").css("visibility", "visible");
             }
         },
         logout: function () {
+            $("dialog").kendoWindow({
+                title: "Log Out",
+                actions: ["Minimize","Maximize","Close"]
+            }).data("kendoWindow").center().open();
+        },
+        yesLogout: function () {
             app.loginViewModel.userName = '';
             app.loginViewModel.password = '';
             app.goToLogin();
+        },
+        noLogout: function() {
+            var window = $("logout-window");
+            window.data("kendoWindow").close();
         }
     });
 

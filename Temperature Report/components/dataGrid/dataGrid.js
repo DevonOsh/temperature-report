@@ -42,6 +42,7 @@
                         },
                     {
                         field: "STAMP_DT",
+                        format: "{0: yyyy-MM-dd}",
                         title: "Date"
                         },
                     {

@@ -36,14 +36,15 @@
         name: "Temp_Report"
     });
 
-    app.goToLogin = function() {application.navigate("components/login/loginView.html");}
-
     app.sendReport = function (reportModel) {
         app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
 
         app.reportJSDO.create(reportModel);
         app.reportJSDO.saveChanges();
     }
+    
+    //All navigation functions
+    app.goToLogin = function() {application.navigate("components/login/loginView.html");}
 
     app.goToTempInput = function () {
         application.navigate("components/tempInput/tempInputView.html", "slide");
