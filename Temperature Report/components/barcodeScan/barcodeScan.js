@@ -75,8 +75,7 @@ var scanResult = 'No results yet';
                     app.goToTempInput();
                 },
                 popup: {appendTo:body},
-                template: "<h4>Location Name: #:LOC_NAME#</h4>" +
-                    "<h4>Location Code: #:LOC_CODE#</h4>"
+                template: "<p>#:LOC_ID#: #:LOC_NAME#</p>"
             });
 
             //attempt to add bad-barcode-val to table on click

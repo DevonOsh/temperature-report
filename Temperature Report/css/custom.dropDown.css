@@ -1,0 +1,33 @@
+.km-root .k-dropdown .k-input {
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.km-root .k-dropdown-wrap,
+.km-root .k-dropdown .k-select {
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    display: block;
+}
+.button {
+    margin-left: .5em;
+    text-align: center;
+}
+.km-root .selected-button {
+    color: #fff;
+    background-color: #f60;
+}
+
+/* solid filled buttons in iOS7 should override the border-color */
+
+.km-ios7 .selected-button {
+    border-color: transparent;
+}
+.button:first-of-type {
+    margin-left: 1em;
+}
+.km-flat .km-popup .k-list-container {
+    height: 70% !important
+}
+.k-list-scroller {
+    height: auto !important;
+}
