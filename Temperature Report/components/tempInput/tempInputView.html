@@ -6,8 +6,16 @@
         <label for="tempInput">Enter the current temp: </label>
         <input id="tempInput" type="number" required autofocus></input>
         <button id="ok-button" data-role="button">OK</button>
-    	<button id="cancel-button" data-role="button">Cancel</button>
+        <button id="cancel-button" data-role="button">Cancel</button>
     </div>
+    <div data-role="modalview" id="range-warning">
+        <h4>
+            Temperature out of range!
+        </h4>
+        <button data-role="button" data-click="app.tempInput.confirm" id="confirm-btn">Confirm</button>
+        <button data-role="button" data-click="app.tempInput.cancel" id="cancel-btn">Cancel</button>
+    </div>
+    <!-- no functioning submit success modal
     <div id="infoSubmitted" data-role="modalview" data-popup='{"height": "500", "width":"300"}'>
         <h3>
             Submitted Info
@@ -18,7 +26,5 @@
             OK
         </button>
     </div>
-    <div id="rangeWarning" data-role="modalview">
-        
-    </div>
+-->
 </div>

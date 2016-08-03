@@ -64,9 +64,8 @@
                     if (inRange) {
                         app.sendReport(reportModel);
                         app.goToSubmitSuccess();
-                    }
-                    else
-                        alert("Temp out of range!");
+                    } else
+                        $("#range-warning").kendoMobileModalView("open");
 
                 } catch (exception) {
                     alert(exception.message);
@@ -91,12 +90,20 @@
             reportModel.EMPLOYEE = app.userInfo.userName;
             reportModel.STAMP_DT = formatDate;
             reportModel.STAMP_TM = currentTime;
+        },
+        confirm: function () {
+            app.sendReport(reportModel);
+            app.goToSubmitSuccess();
+            $("#range-warning").kendoMobileModalView("close");
+        },
+        cancel: function () {
+            $("#range-warning").kendoMobileModalView("close");
         }
     }
 
     app.successView = {
         onShow: function () {
-            
+
             console.log(reportModel);
 
             $("#submitListView").kendoListView({
