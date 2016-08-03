@@ -12,11 +12,13 @@
                 skin: "flat"
             }
         );
+        //This line is here to allow the modal to be called from any view
+        kendo.mobile.init(application.element.children("[data-role=modalview]"));
     });
 
     app.JSDOSettings = {
-        "serviceURI": "http://10.0.1.239:8810/Temp_Report",
-        "catalogURIs": "http://10.0.1.239:8810/Temp_Report/static/Temp_ReportService.json",
+        "serviceURI": "http://10.0.1.239:8810/Temperature_Report",
+        "catalogURIs": "http://10.0.1.239:8810/Temperature_Report/static/Temperature_ReportService.json",
         "authenticationModel": "anonymous"
     };
 
@@ -25,7 +27,7 @@
     app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
 
     app.locJSDO = new progress.data.JSDO({
-        name: "Temp_Loc"
+        name: "Temperature_Loc"
     });
 
     app.loginJSDO = new progress.data.JSDO({
@@ -33,7 +35,7 @@
     });
 
     app.reportJSDO = new progress.data.JSDO({
-        name: "Temp_Report"
+        name: "Temperature_Report"
     });
 
     app.sendReport = function (reportModel) {
@@ -44,7 +46,7 @@
     }
     
     //All navigation functions
-    app.goToLogin = function() {application.navigate("components/login/loginView.html");}
+    app.goToLogin = function() {application.navigate("components/login/loginView.html", "slide: right");}
 
     app.goToTempInput = function () {
         application.navigate("components/tempInput/tempInputView.html", "slide");

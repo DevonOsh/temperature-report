@@ -66,10 +66,7 @@
             }
         },
         logout: function () {
-            $("dialog").kendoWindow({
-                title: "Log Out",
-                actions: ["Minimize","Maximize","Close"]
-            }).data("kendoWindow").center().open();
+            $("#logout-window").kendoMobileModalView("open");
         },
         yesLogout: function () {
             app.loginViewModel.userName = '';
@@ -77,8 +74,7 @@
             app.goToLogin();
         },
         noLogout: function() {
-            var window = $("logout-window");
-            window.data("kendoWindow").close();
+			$("#logout-window").kendoMobileModalView("close");
         }
     });
 
