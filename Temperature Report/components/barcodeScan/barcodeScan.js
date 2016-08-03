@@ -3,6 +3,7 @@ var scanResult = 'No results yet';
 (function (temp, $) {
     var ScanViewModel,
         failViewModel,
+        locationID,
         app = temp.app = temp.app || {};
 
     ScanViewModel = kendo.data.ObservableObject.extend({
@@ -70,34 +71,46 @@ var scanResult = 'No results yet';
                 dataSource: dataSource,
                 select: function (e) {
                     var dataItem = this.dataItem(e.item.index());
-                    var locID = dataItem.LOC_ID;
-                    scanResult = locID;
-                    app.goToTempInput();
+                    locationID = dataItem.LOC_ID;
+                    scanResult = locationID;
+                     $("#new-barcode").kendoMobileModalView("open");
                 },
-                popup: {appendTo:body},
+                popup: {
+                    appendTo: body
+                },
                 template: "<p>#:LOC_ID#: #:LOC_NAME#</p>"
             });
 
             //attempt to add bad-barcode-val to table on click
             $("#bad-barcode-button").unbind().click(function () {
-                var locationNum = prompt("Enter the location number: ");
-                var loc,
-                    jsdo = app.locJSDO;
-                loc = jsdo.find(function (jsrecord) {
-                    return (jsrecord.data.LOC_ID == locationNum);
-                });
-                console.log(loc);
-                var updateData = {BARCODE_GOOD: false};
-                jsdo.assign(updateData);
-                jsdo.saveLocal();
-                jsdo.saveChanges();
-                jsdo.acceptChanges();
+
             });
-            
+
             $("#back-to-scan").unbind().click(function () {
                 app.goToScan();
             });
+
+        },
+        newBarcode: function () {
+            var loc,
+                jsdo = app.locJSDO;
+            loc = jsdo.find(function (jsrecord) {
+                return (jsrecord.data.LOC_ID == locationID);
+            });
+            console.log(loc);
+            var updateData = {
+                BARCODE_GOOD: false
+            };
+            jsdo.assign(updateData);
+            jsdo.saveLocal();
+            jsdo.saveChanges();
+            jsdo.acceptChanges();
             
+            app.goToTempInput();
+        },
+        noNewBarcode: function () {
+            $("#new-barcode").kendoMobileModalView("close");
+            app.goToTempInput();
         }
     }
 })(window, jQuery);

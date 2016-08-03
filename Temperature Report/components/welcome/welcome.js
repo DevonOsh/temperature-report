@@ -7,8 +7,7 @@
 			
 		},
 		onHide: function() {
-			//What should happen once the view is hidden.
-			//Called from data-hide in HTML
+			
 		},
         createNewReport: function() {},
         checkForReport: function() {}

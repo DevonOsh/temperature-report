@@ -16,16 +16,19 @@
         kendo.mobile.init(application.element.children("[data-role=modalview]"));
     });
 
+    //Settings for the service
     app.JSDOSettings = {
         "serviceURI": "http://10.0.1.239:8810/Temperature_Report",
         "catalogURIs": "http://10.0.1.239:8810/Temperature_Report/static/Temperature_ReportService.json",
         "authenticationModel": "anonymous"
     };
 
+    //Create the session
     app.JSDOSession = new progress.data.Session();
     app.JSDOSession.login(app.JSDOSettings.serviceURI);
     app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
 
+    //Create all the JSDOs
     app.locJSDO = new progress.data.JSDO({
         name: "Temperature_Loc"
     });
@@ -38,6 +41,7 @@
         name: "Temperature_Report"
     });
 
+    //send report back to database
     app.sendReport = function (reportModel) {
         app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
 

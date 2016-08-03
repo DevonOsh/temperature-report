@@ -50,7 +50,7 @@
                     throw new Error("Invalid Username");
                 else {
                     USERNAME = user.data.USERNAME,
-                        PASSWORD = user.data.PASSWORD
+                    PASSWORD = user.data.PASSWORD
                 }
                 if (!(PASSWORD == password))
                     throw new Error("Invalid Password");

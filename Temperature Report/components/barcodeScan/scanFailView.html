@@ -1,16 +1,10 @@
-<div id="scanFailView"
-    data-role="view"
-    data-title="Scan failed"
-    data-layout="views-layout"
-    data-show="app.scanFail.onShow">
-
+<div id="scanFailView" data-role="view" data-title="Scan failed" data-layout="views-layout" data-show="app.scanFail.onShow">
     <div>
         <h3>
             Unable to get location from scan.
         </h3>
         <label for="idDropDown">Select from locations:</label>
-        <input id="locDropDown"/>
-        
+        <input id="locDropDown" />
         <button data-role="button" id="bad-barcode-button">
             Bad barcode?
         </button>
@@ -20,5 +14,12 @@
         <button data-role="button" id="back-to-scan">
             Scan again
         </button>
+    </div>
+    <div data-role="modalview" id="new-barcode">
+        <h4>
+        	New barcode for this location?
+        </h4>
+        <button data-role="button" data-click="app.scanFail.newBarcode" id="new-barcode">Yes</button>
+        <button data-role="button" data-click="app.scanFail.noNewBarcode" id="no-new-barcode">No</button>
     </div>
 </div>

@@ -73,6 +73,9 @@
             });
 
         },
+        onHide: function() {
+            $("#tempInput").val('');
+        },
         //build the model to be sent to OE
         buildModel: function (data, temp, range) {
             var currentDate = new Date(),
