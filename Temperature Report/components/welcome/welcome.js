@@ -17,30 +17,40 @@
         },
         createNewReport: function () {
             var locationJSDO = app.locJSDO,
-                reportJSDO = app.reportJSDO;
-
-            var date = app.getDate,
-                reportID = 1000;
+                reportJSDO = app.reportJSDO,
+                date = app.getDate(),
+                reportID = app.welcome.getReportID();
 
             function onAfterFill(jsdo, success, request) {
                 jsdo.foreach(function (location) {
                     var model = {
                         LOCATION_ID: location.data.LOC_ID,
                         LOCATION_NAME: location.data.LOC_NAME,
-                        TEMP: "",
-                        IN_RANGE: "",
-                        EMPLOYEE: "",
+                        TEMP: null,
+                        IN_RANGE: null,
+                        EMPLOYEE: null,
                         STAMP_DT: date,
-                        STAMP_DT: "",
+                        STAMP_TM: null,
                         REPORT_ID: reportID
                     }
-                    console.log(model);
+                    app.sendReport(model);
                 });
             }
 
             locationJSDO.subscribe('afterFill', onAfterFill, this);
             locationJSDO.fill();
         },
-        checkForReport: function () {}
+        checkForReport: function () {
+            var date = app.getDate(),
+                jsdo = app.reportJSDO;
+            var reportExists = jsdo.find(function(jsrecord){
+                return (jsrecord.data.STAMP_DT == date);
+            });
+            
+            if(reportExists == null)
+                app.welcome.createNewReport();
+            else
+                app.goToScan();
+        }
     }
 })(window, jQuery);

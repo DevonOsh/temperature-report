@@ -22,9 +22,9 @@
             mm = currentDate.getMonth() + 1,
             dd = currentDate.getDate(),
             formatDate = yyyy + "-" + mm + "-" + dd;
-        return formatDate;
- 
-    };
+        return formatDate; 
+    }
+    
     app.getTime = function() {
         var currentDate = new Date(),
         	dateString = currentDate.toString();
@@ -68,7 +68,7 @@
 
     //All navigation functions
     app.goToLogin = function () {
-        application.navigate("components/login/loginView.html", "slide: right");
+        application.navigate("components/login/loginView.html", "slide");
     }
 
     app.goToTempInput = function () {
