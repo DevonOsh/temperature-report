@@ -9,7 +9,7 @@
         "IN_RANGE": "",
         "EMPLOYEE": "",
         "STAMP_DT": "",
-        "STAMP_DT": ""
+        "STAMP_TM": ""
     }
 
     app.tempInput = {
@@ -34,8 +34,9 @@
             //Create a listview
             $("#resultListView").kendoListView({
                 dataSource: locDataSource,
-                template: "<h4>Location Name: #:LOC_NAME#</h4>" +
-                    "<h4>Location Code: #:LOC_CODE#</h4>"
+                template: "<li class='list-group-item'>Location ID: #:LOC_ID#</li>" +
+                	"<li class='list-group-item'>Location Name: #:LOC_NAME#</li>" +
+                    "<li class='list-group-item'>Location Code: #:LOC_CODE#</li>"
             });
 
             //Create the model and save the changes to the db
@@ -101,6 +102,7 @@
         },
         cancel: function () {
             $("#range-warning").kendoMobileModalView("close");
+            $("#tempInput").val('');
         }
     }
 
@@ -111,12 +113,12 @@
 
             $("#submitListView").kendoListView({
                 dataSource: [reportModel],
-                template: "<h4>Location ID: #:LOCATION_ID#</h4>" +
-                    "<h4>Location Name: #:LOCATION_NAME#</h4>" +
-                    "<h4>Recorded Temp: #:TEMP#</h4>" +
-                    "<h4>Employee: #:EMPLOYEE#</h4>" +
-                    "<h4>Date: #:STAMP_DT#</h4>" +
-                    "<h4>Time: #:STAMP_TM#</h4>"
+                template: "<li class='list-group-item'>Location ID: #:LOCATION_ID#</li>" +
+                    "<li class='list-group-item'>Location Name: #:LOCATION_NAME#</li>" +
+                    "<li class='list-group-item'>Recorded Temp: #:TEMP#</li>" +
+                    "<li class='list-group-item'>Employee: #:EMPLOYEE#</li>" +
+                    "<li class='list-group-item'>Date: #:STAMP_DT#</li>" +
+                    "<li class='list-group-item'>Time: #:STAMP_TM#</li>"
             });
 
             $("#confirm-button").unbind().click(function () {
