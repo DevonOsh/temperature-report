@@ -26,9 +26,10 @@
     <link rel="stylesheet" type="text/css" href="css/kendo.common.min.css" />
     <link rel="stylesheet" type="text/css" href="css/kendo.default.min.css" />
     <link rel="stylesheet" type="text/css" href="css/kendo.mobile.all.min.css" />
-    <!--<link rel="stylesheet" type="text/css" href="css/kendo.flat.mobile.min.css"/>-->
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/custom.dropDown.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css" />
+          
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/kendo.all.min.js"></script>
@@ -38,12 +39,33 @@
     <script src="components/barcodeScan/barcodeScan.js"></script>
     <script src="components/tempInput/tempInput.js"></script>
     <script src="components/dataGrid/dataGrid.js"></script>
+    <script src="components/welcome/welcome.js"></script>
+    <script src="bootstrap/bootstrap.js"></script>
+    
     <title>Temperature Report</title>
+    <!--Modal styles-->
+    <style>
+        .km-modalview .km-scroll-container {
+            text-align: center;
+        }
+        .form-signin {
+            max-width: 400px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .btn-primary {
+            background: #10c4b2;
+            border-color: #0b8e81;
+        }
+        .btn-primary:hover {
+            background: #0b8e81;
+            border-color: #075f56;
+        }
+    </style>
 </head>
 
 <body id="body">
     <div data-role="view"></div>
-
     <!--Main Layout-->
     <div data-role="layout" data-id="views-layout">
         <!--Header-->
@@ -61,6 +83,7 @@
                 <a href="components/barcodeScan/barcodeScanView.html" data-icon="organize">Scan</a>
                 <a href="components/tempInput/tempInputView.html" data-icon="info">Input</a>
                 <a href="components/dataGrid/dataGridView.html" data-icon="organize">Grid</a>
+                <a href="components/welcome/welcomeView.html" data-icon="info">Welcome</a>
             </div>
         </div>
     </div>
