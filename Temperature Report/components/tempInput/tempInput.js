@@ -3,14 +3,13 @@
         app = temp.app = temp.app || {};
 
     var reportModel = {
-        "REPORT_ID": "",
         "LOCATION_ID": "",
         "LOCATION_NAME": "",
         "TEMP": "",
         "IN_RANGE": "",
         "EMPLOYEE": "",
         "STAMP_DT": "",
-        "STAMP_TM": ""
+        "STAMP_DT": ""
     }
 
     app.tempInput = {
@@ -35,9 +34,8 @@
             //Create a listview
             $("#resultListView").kendoListView({
                 dataSource: locDataSource,
-                template: "<li class='list-group-item'>Location ID: #:LOC_ID#</li>" +
-                	"<li class='list-group-item'>Location Name: #:LOC_NAME#</li>" +
-                    "<li class='list-group-item'>Location Code: #:LOC_CODE#</li>"
+                template: "<h4>Location Name: #:LOC_NAME#</h4>" +
+                    "<h4>Location Code: #:LOC_CODE#</h4>"
             });
 
             //Create the model and save the changes to the db
@@ -64,7 +62,7 @@
 
                     app.tempInput.buildModel(view, enteredTemp, inRange);
                     if (inRange) {
-                        app.tempInput.updateReport();
+                        app.sendReport(reportModel);
                         app.goToSubmitSuccess();
                     } else
                         $("#range-warning").kendoMobileModalView("open");
@@ -80,64 +78,45 @@
         },
         //build the model to be sent to OE
         buildModel: function (data, temp, range) {
-            var date = app.getDate();
-            var time = app.getTime();
-            
-			reportModel.LOCATION_ID = data[0].LOC_ID;
+            var currentDate = new Date(),
+                yyyy = currentDate.getFullYear(),
+                mm = currentDate.getMonth() + 1,
+                dd = currentDate.getDate(),
+                formatDate = yyyy + "-" + mm + "-" + dd,
+                dateString = currentDate.toString(),
+                currentTime = dateString.substring(16, 21);
+
+            reportModel.LOCATION_ID = data[0].LOC_ID;
             reportModel.LOCATION_NAME = data[0].LOC_NAME;
             reportModel.TEMP = temp;
             reportModel.IN_RANGE = range;
             reportModel.EMPLOYEE = app.userInfo.userName;
-            reportModel.STAMP_DT = date;
-            reportModel.STAMP_TM = time;
-            
-            //Filles the JSDO so that the update function can read from it.
-            app.reportJSDO.fill();
-        },
-        updateReport: function() {
-            var jsdo = app.reportJSDO,
-                report,
-                locationID = reportModel.LOCATION_ID,
-                updateData = {
-                    IN_RANGE: reportModel.IN_RANGE,
-                    TEMP: reportModel.TEMP,
-                    STAMP_TM: reportModel.STAMP_TM
-                };
-            report = jsdo.find(function (jsrecord) {
-                return (jsrecord.data.LOCATION_ID == locationID);
-            });
-            console.log("Found report:\n" + report);
-            console.log("Update data:\n" + updateData);
-            console.log("JSDO currently:\n" +jsdo);
-            //jsdo.assign(updateData);
-            //jsdo.saveLocal();
-            //jsdo.saveChanges();
-            //jsdo.acceptChanges();
+            reportModel.STAMP_DT = formatDate;
+            reportModel.STAMP_TM = currentTime;
         },
         confirm: function () {
-            app.tempInput.updateReport();
+            app.sendReport(reportModel);
             app.goToSubmitSuccess();
             $("#range-warning").kendoMobileModalView("close");
         },
         cancel: function () {
             $("#range-warning").kendoMobileModalView("close");
-            $("#tempInput").val('');
         }
     }
 
     app.successView = {
         onShow: function () {
 
-            //console.log(reportModel);
+            console.log(reportModel);
 
             $("#submitListView").kendoListView({
                 dataSource: [reportModel],
-                template: "<li class='list-group-item'>Location ID: #:LOCATION_ID#</li>" +
-                    "<li class='list-group-item'>Location Name: #:LOCATION_NAME#</li>" +
-                    "<li class='list-group-item'>Recorded Temp: #:TEMP#</li>" +
-                    "<li class='list-group-item'>Employee: #:EMPLOYEE#</li>" +
-                    "<li class='list-group-item'>Date: #:STAMP_DT#</li>" +
-                    "<li class='list-group-item'>Time: #:STAMP_TM#</li>"
+                template: "<h4>Location ID: #:LOCATION_ID#</h4>" +
+                    "<h4>Location Name: #:LOCATION_NAME#</h4>" +
+                    "<h4>Recorded Temp: #:TEMP#</h4>" +
+                    "<h4>Employee: #:EMPLOYEE#</h4>" +
+                    "<h4>Date: #:STAMP_DT#</h4>" +
+                    "<h4>Time: #:STAMP_TM#</h4>"
             });
 
             $("#confirm-button").unbind().click(function () {

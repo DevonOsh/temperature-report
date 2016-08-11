@@ -1,5 +1,6 @@
 (function (temp, $) {
-    var app = temp.app = temp.app || {};
+    var loginViewModel,
+        app = temp.app = temp.app || {};
 
     app.userInfo = {
         firstName: "",

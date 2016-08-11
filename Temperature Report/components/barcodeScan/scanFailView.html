@@ -1,30 +1,25 @@
 <div id="scanFailView" data-role="view" data-title="Scan failed" data-layout="views-layout" data-show="app.scanFail.onShow">
-    <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
+    <div>
         <h3>
             Unable to get location from scan.
         </h3>
-        <div class="row">
-            <label for="idDropDown" class="col-xs-3 col-form-label">Select from locations:</label>
-            <div class="col-xs-9">
-            	<input id="locDropDown" class="form-control" />
-            </div>
-        </div>
-        <div class="row">
-            <button id="add-button" class="btn btn-primary btn-lg btn-block">
-            	Add location
-        	</button>
-            <button id="back-to-scan" class="btn btn-default btn-lg btn-block">
-            	Back to Scan
-        	</button>
-        </div>
+        <label for="idDropDown">Select from locations:</label>
+        <input id="locDropDown" />
+        <button data-role="button" id="bad-barcode-button">
+            Bad barcode?
+        </button>
+        <button data-role="button" id="add-button">
+            Add location
+        </button>
+        <button data-role="button" id="back-to-scan">
+            Scan again
+        </button>
     </div>
-    <div data-role="modalview" id="new-barcode" style="width: 70%; height: 33%">
+    <div data-role="modalview" id="new-barcode">
         <h4>
         	New barcode for this location?
         </h4>
-        <div class="btn-group">
-            <button data-role="button" data-click="app.scanFail.newBarcode" id="new-barcode" class="btn btn-primary">Yes</button>
-            <button data-role="button" data-click="app.scanFail.noNewBarcode" id="no-new-barcode" class="btn btn-default">No</button>
-        </div>
+        <button data-role="button" data-click="app.scanFail.newBarcode" id="new-barcode">Yes</button>
+        <button data-role="button" data-click="app.scanFail.noNewBarcode" id="no-new-barcode">No</button>
     </div>
 </div>

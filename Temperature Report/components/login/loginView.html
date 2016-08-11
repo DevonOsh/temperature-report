@@ -1,9 +1,6 @@
 <div data-role="view" data-title="Login" data-reload="true" data-layout="login-layout" data-model="app.loginViewModel" data-show="app.loginViewModel.onShow">
     <div class="signin-view">
-        <form class="form-signin">
-            <h3 class="form-signin-heading">
-                Please Log In
-            </h3>
+        <form>
             <ul data-role="listview" data-style="inset">
                 <li>
                     <label>Username
@@ -16,20 +13,20 @@
                     </label>
                 </li>
             </ul>
-                <button class="btn btn-primary btn-lg btn-block" data-bind="events: { click: signin }">Sign In</button>
+            <div class="button-group button-group-vertical">
+                <a data-role="button" class="primary" data-bind="events: { click: signin }">Sign In</a>
+            </div>
             <div id="errorMessage" style="visibility: hidden">
             </div>
         </form>
-
-        <div data-role="modalview" id="logout-window" style="width: 70%; height: 33%">
+        <!--logout modal-->
+        <div data-role="modalview" id="logout-window">
             <h4>
                 Are you sure you want to log out?
-            </h4>
-            <div class="btn-group">
-                <button data-role="button" data-click="app.loginViewModel.yesLogout" id="yes-logout-btn" class="btn btn-primary">Yes</button>
-                <button data-role="button" data-click="app.loginViewModel.noLogout" id="no-logout-btn" class="btn btn-default">No</button>
-            </div>
+                </h4>
+            <button data-role="button" data-click="app.loginViewModel.yesLogout" id="yes-logout-btn">Yes</button>
+            <button data-role="button" data-click="app.loginViewModel.noLogout" id="no-logout-btn">No</button>
         </div>
-
+        <!--end modal-->
     </div>
 </div>
