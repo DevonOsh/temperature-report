@@ -28,7 +28,7 @@
     app.getTime = function() {
         var currentDate = new Date(),
         	dateString = currentDate.toString();
-        var currentTime = currentDate.substring(16, 21);
+        var currentTime = dateString.substring(16, 21);
         
         return currentTime;
     }
@@ -75,10 +75,10 @@
         application.navigate("components/tempInput/tempInputView.html", "slide");
     }
     app.goToScan = function () {
-        application.navigate("components/barcodeScan/barcodeScanView.html", "slide");
+        application.navigate("components/barcodeScan/barcodeScanView.html");
     }
     app.goToScanFail = function () {
-        application.navigate("components/barcodeScan/scanFailView.html", "slide");
+        application.navigate("components/barcodeScan/scanFailView.html","slide");
     }
     app.goToSubmitSuccess = function () {
         application.navigate("components/tempInput/successView.html", "slide");

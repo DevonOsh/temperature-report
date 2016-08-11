@@ -47,7 +47,31 @@ var scanResult = 'No results yet';
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
+            //app.scanBarcode.showCurrentReport();
+            console.log(app.userInfo);
+        },
+        showCurrentReport: function () {
+            var date = app.getDate(),
+                reportJSDO = app.reportJSDO;
 
+            function onAfterFill(jsdo, success, request) {
+                jsdo.foreach(function (report) {
+                    var reportDate = report.data.STAMP_DT;
+                    if (reportDate == date) {
+                        //WHY DOES THIS NOT WORK?!
+                        //$("#reportStatusList").append(
+                        //    "<li class='list-group-item'>" +
+                        //    location.data.LOC_ID +
+                        //    ' ' +
+                        //    location.data.LOC_NAME +
+                        //    "</li>"
+                        //);
+                        console.log(report);
+                    }
+                });
+            }
+            reportJSDO.subscribe('afterFill', onAfterFill, this);
+            reportJSDO.fill();
         }
     }
 
@@ -73,7 +97,7 @@ var scanResult = 'No results yet';
                     var dataItem = this.dataItem(e.item.index());
                     locationID = dataItem.LOC_ID;
                     scanResult = locationID;
-                     $("#new-barcode").kendoMobileModalView("open");
+                    $("#new-barcode").kendoMobileModalView("open");
                 },
                 popup: {
                     appendTo: body
@@ -105,7 +129,7 @@ var scanResult = 'No results yet';
             jsdo.saveLocal();
             jsdo.saveChanges();
             jsdo.acceptChanges();
-            
+
             app.goToTempInput();
         },
         noNewBarcode: function () {

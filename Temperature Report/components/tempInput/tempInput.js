@@ -3,6 +3,7 @@
         app = temp.app = temp.app || {};
 
     var reportModel = {
+        "REPORT_ID": "",
         "LOCATION_ID": "",
         "LOCATION_NAME": "",
         "TEMP": "",
@@ -63,7 +64,7 @@
 
                     app.tempInput.buildModel(view, enteredTemp, inRange);
                     if (inRange) {
-                        app.sendReport(reportModel);
+                        app.tempInput.updateReport();
                         app.goToSubmitSuccess();
                     } else
                         $("#range-warning").kendoMobileModalView("open");
@@ -79,24 +80,42 @@
         },
         //build the model to be sent to OE
         buildModel: function (data, temp, range) {
-            var currentDate = new Date(),
-                yyyy = currentDate.getFullYear(),
-                mm = currentDate.getMonth() + 1,
-                dd = currentDate.getDate(),
-                formatDate = yyyy + "-" + mm + "-" + dd,
-                dateString = currentDate.toString(),
-                currentTime = dateString.substring(16, 21);
-
-            reportModel.LOCATION_ID = data[0].LOC_ID;
+            var date = app.getDate();
+            var time = app.getTime();
+            
+			reportModel.LOCATION_ID = data[0].LOC_ID;
             reportModel.LOCATION_NAME = data[0].LOC_NAME;
             reportModel.TEMP = temp;
             reportModel.IN_RANGE = range;
             reportModel.EMPLOYEE = app.userInfo.userName;
-            reportModel.STAMP_DT = formatDate;
-            reportModel.STAMP_TM = currentTime;
+            reportModel.STAMP_DT = date;
+            reportModel.STAMP_TM = time;
+            
+            //Filles the JSDO so that the update function can read from it.
+            app.reportJSDO.fill();
+        },
+        updateReport: function() {
+            var jsdo = app.reportJSDO,
+                report,
+                locationID = reportModel.LOCATION_ID,
+                updateData = {
+                    IN_RANGE: reportModel.IN_RANGE,
+                    TEMP: reportModel.TEMP,
+                    STAMP_TM: reportModel.STAMP_TM
+                };
+            report = jsdo.find(function (jsrecord) {
+                return (jsrecord.data.LOCATION_ID == locationID);
+            });
+            console.log("Found report:\n" + report);
+            console.log("Update data:\n" + updateData);
+            console.log("JSDO currently:\n" +jsdo);
+            //jsdo.assign(updateData);
+            //jsdo.saveLocal();
+            //jsdo.saveChanges();
+            //jsdo.acceptChanges();
         },
         confirm: function () {
-            app.sendReport(reportModel);
+            app.tempInput.updateReport();
             app.goToSubmitSuccess();
             $("#range-warning").kendoMobileModalView("close");
         },
@@ -109,7 +128,7 @@
     app.successView = {
         onShow: function () {
 
-            console.log(reportModel);
+            //console.log(reportModel);
 
             $("#submitListView").kendoListView({
                 dataSource: [reportModel],
