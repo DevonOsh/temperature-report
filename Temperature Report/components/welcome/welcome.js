@@ -21,7 +21,7 @@
                 date = app.getDate(),
                 reportID = app.welcome.getReportID();
 
-            function onAfterFill(jsdo, success, request) {
+            function onAfterFill(jsdo, success, request) {                  
                 jsdo.foreach(function (location) {
                     var model = {
                         LOCATION_ID: location.data.LOC_ID,
@@ -34,9 +34,8 @@
                         REPORT_ID: reportID
                     }
                     app.sendReport(model);
-                });
+                });               
             }
-
             locationJSDO.subscribe('afterFill', onAfterFill, this);
             locationJSDO.fill();
         },

@@ -17,19 +17,25 @@
     });
 
     app.getDate = function () {
+
+        function getMonth(date) {
+            var month = date.getMonth() + 1;
+            return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
+        }
+
         var currentDate = new Date(),
             yyyy = currentDate.getFullYear(),
-            mm = currentDate.getMonth() + 1,
+            mm = getMonth(currentDate),
             dd = currentDate.getDate(),
             formatDate = yyyy + "-" + mm + "-" + dd;
-        return formatDate; 
+        return formatDate;
     }
-    
-    app.getTime = function() {
+
+    app.getTime = function () {
         var currentDate = new Date(),
-        	dateString = currentDate.toString();
+            dateString = currentDate.toString();
         var currentTime = dateString.substring(16, 21);
-        
+
         return currentTime;
     }
 
@@ -78,7 +84,7 @@
         application.navigate("components/barcodeScan/barcodeScanView.html");
     }
     app.goToScanFail = function () {
-        application.navigate("components/barcodeScan/scanFailView.html","slide");
+        application.navigate("components/barcodeScan/scanFailView.html", "slide");
     }
     app.goToSubmitSuccess = function () {
         application.navigate("components/tempInput/successView.html", "slide");

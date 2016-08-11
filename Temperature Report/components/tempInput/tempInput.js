@@ -97,6 +97,7 @@
         updateReport: function() {
             var jsdo = app.reportJSDO,
                 report,
+                date = app.getDate(),
                 locationID = reportModel.LOCATION_ID,
                 updateData = {
                     EMPLOYEE: reportModel.EMPLOYEE,
@@ -105,15 +106,12 @@
                     TEMP: reportModel.TEMP
                 };
             report = jsdo.find(function (jsrecord) {
-                return (jsrecord.data.LOCATION_ID == locationID);
+                return (jsrecord.data.LOCATION_ID == locationID && jsrecord.data.STAMP_DT == date);
             });
-            console.log("Found report:\n" + report);
-            console.log("Update data:\n" + updateData);
-            console.log("JSDO currently:\n" +jsdo);
-            //jsdo.assign(updateData);
-            //jsdo.saveLocal();
-            //jsdo.saveChanges();
-            //jsdo.acceptChanges();
+            jsdo.assign(updateData);
+            jsdo.saveLocal();
+            jsdo.saveChanges();
+            jsdo.acceptChanges();
         },
         confirm: function () {
             app.tempInput.updateReport();

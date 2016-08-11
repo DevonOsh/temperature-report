@@ -47,7 +47,7 @@ var scanResult = 'No results yet';
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
-            //app.scanBarcode.showCurrentReport();
+            app.scanBarcode.showCurrentReport();
             console.log(app.userInfo);
         },
         showCurrentReport: function () {
@@ -58,15 +58,13 @@ var scanResult = 'No results yet';
                 jsdo.foreach(function (report) {
                     var reportDate = report.data.STAMP_DT;
                     if (reportDate == date) {
-                        //WHY DOES THIS NOT WORK?!
-                        //$("#reportStatusList").append(
-                        //    "<li class='list-group-item'>" +
-                        //    location.data.LOC_ID +
-                        //    ' ' +
-                        //    location.data.LOC_NAME +
-                        //    "</li>"
-                        //);
-                        console.log(report);
+                        $("#reportStatusList").append(
+                            "<li class='list-group-item'>" +
+                            report.data.LOCATION_ID +
+                            ' ' +
+                            report.data.LOCATION_NAME +
+                            "</li>"
+                        );
                     }
                 });
             }
