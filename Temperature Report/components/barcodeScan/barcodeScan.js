@@ -48,12 +48,16 @@ var scanResult = 'No results yet';
                 app.goToScanFail();
             });
             app.scanBarcode.showCurrentReport();
-            console.log(app.userInfo);
+        },
+        onHide: function() {
+            //clear the list so it can be reloaded
+            $("#reportStatusList").html('');
         },
         showCurrentReport: function () {
             var date = app.getDate(),
                 reportJSDO = app.reportJSDO;
-
+			
+            //Read from the database and display the report currently in progress and status of each area
             function onAfterFill(jsdo, success, request) {
                 jsdo.foreach(function (report) {
                     var reportDate = report.data.STAMP_DT;
