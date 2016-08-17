@@ -60,10 +60,19 @@ var scanResult = 'No results yet';
             //Read from the database and display the report currently in progress and status of each area
             function onAfterFill(jsdo, success, request) {
                 jsdo.foreach(function (report) {
-                    var reportDate = report.data.STAMP_DT;
+                    var reportDate = report.data.STAMP_DT,
+                        completed = "<span class='glyphicon glyphicon-ok'></span>",
+                        notCompleted = "",
+                        span;
                     if (reportDate == date) {
+                        if(report.data.STAMP_TM == null)
+                            span = notCompleted;
+                        else
+                            span = completed;
+                        
                         $("#reportStatusList").append(
                             "<li class='list-group-item'>" +
+                            span +
                             report.data.LOCATION_ID +
                             ' ' +
                             report.data.LOCATION_NAME +
