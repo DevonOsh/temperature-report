@@ -5,6 +5,13 @@
     app.welcome = {
         onShow: function () {
             app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
+            $("#create-report-btn").unbind().click(function () {
+                app.welcome.checkForReport();
+            });
+            $("#view-reports-btn").unbind().click(function () {
+                app.goToGrid();
+            });
+                
         },
         onHide: function () {
 
@@ -48,8 +55,10 @@
             
             if(reportExists == null)
                 app.welcome.createNewReport();
-            else
+            else {
+                alert("Today's report has already been started");
                 app.goToScan();
+            }
         }
     }
 })(window, jQuery);

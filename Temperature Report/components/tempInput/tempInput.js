@@ -3,14 +3,14 @@
         app = temp.app = temp.app || {};
 
     var reportModel = {
-        "REPORT_ID": "",
-        "LOCATION_ID": "",
-        "LOCATION_NAME": "",
-        "TEMP": "",
-        "IN_RANGE": "",
-        "EMPLOYEE": "",
-        "STAMP_DT": "",
-        "STAMP_TM": ""
+        REPORT_ID: '',
+        LOCATION_ID: '',
+        LOCATION_NAME: '',
+        TEMP: '',
+        IN_RANGE: '',
+        EMPLOYEE: '',
+        STAMP_DT: '',
+        STAMP_TM: ''
     }
 
     app.tempInput = {
@@ -99,11 +99,12 @@
                 report,
                 date = app.getDate(),
                 locationID = reportModel.LOCATION_ID,
+                temp = Number(reportModel.TEMP).toFixed(2),
                 updateData = {
                     EMPLOYEE: reportModel.EMPLOYEE,
                     IN_RANGE: reportModel.IN_RANGE,
                     STAMP_TM: reportModel.STAMP_TM,
-                    TEMP: reportModel.TEMP
+                    TEMP: temp
                 };
             report = jsdo.find(function (jsrecord) {
                 return (jsrecord.data.LOCATION_ID == locationID && jsrecord.data.STAMP_DT == date);
@@ -126,9 +127,6 @@
 
     app.successView = {
         onShow: function () {
-
-            //console.log(reportModel);
-
             $("#submitListView").kendoListView({
                 dataSource: [reportModel],
                 template: "<li class='list-group-item'>Location ID: #:LOCATION_ID#</li>" +

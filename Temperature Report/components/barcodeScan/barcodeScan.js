@@ -47,11 +47,11 @@ var scanResult = 'No results yet';
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
+            $("#reportStatusList").remove("li");
             app.scanBarcode.showCurrentReport();
         },
         onHide: function() {
             //clear the list so it can be reloaded
-            $("#reportStatusList").html('');
         },
         showCurrentReport: function () {
             var date = app.getDate(),

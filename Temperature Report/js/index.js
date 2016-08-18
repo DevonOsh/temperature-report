@@ -89,4 +89,7 @@
     app.goToSubmitSuccess = function () {
         application.navigate("components/tempInput/successView.html", "slide");
     }
+    app.goToGrid = function() {
+        application.navigate("components/dataGrid/dataGridView.html","slide");
+    }
 })(window);
