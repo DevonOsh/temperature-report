@@ -1,12 +1,14 @@
-<div data-role="view" data-title="Scan Location" data-reload="true" data-layout="views-layout" data-model="app.scanBarcode.viewModel" data-show="app.scanBarcode.onShow" data-hide="app.scanBarcode.onHide">
+<div id="barcodeScanView" data-role="view" data-title="Scan Location" data-reload="true" data-layout="views-layout" data-model="app.scanBarcode.viewModel" data-show="app.scanBarcode.onShow" data-hide="app.scanBarcode.onHide">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
         <h3 class="hassubtitle">Begin Scan:</h3>
-        
         <button class="btn btn-xlg btn-primary btn-block" data-bind="click: scan">Scan</button>
-        <button id="list-button" class="btn btn-lg btn-default btn-block">Skip</button>
+        <button id="list-button" class="btn btn-lg btn-default btn-block">Select a location</button>
     </div>
-    
-    <ul id="reportStatusList" class="col-xs-12 col-md-6 col-md-offset-3">
-        
-    </ul>
+    <div id="reportStatus">
+        <h3 class="display-3">
+        Current report progress:
+    </h3>
+        <ul id="reportStatusList" class="col-xs-12 col-md-6 col-md-offset-3">
+        </ul>
+    </div>
 </div>

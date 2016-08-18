@@ -9,6 +9,7 @@
     app.tempGrid = {
         onShow: function () {
             $("#temp-grid").kendoGrid({
+                toolbar:["pdf"],
                 dataSource: {
                     type: "jsdo",
                     transport: {
