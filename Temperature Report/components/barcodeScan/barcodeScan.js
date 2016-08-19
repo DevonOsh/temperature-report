@@ -5,6 +5,8 @@ var scanResult = 'No results yet';
         failViewModel,
         locationID,
         app = temp.app = temp.app || {};
+    
+    var functionCallCount = 0;
 
     ScanViewModel = kendo.data.ObservableObject.extend({
         scan: function () {
@@ -47,16 +49,19 @@ var scanResult = 'No results yet';
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
-            $("#reportStatusList").remove("li");
+            
             app.scanBarcode.showCurrentReport();
         },
         onHide: function () {
             //clear the list so it can be reloaded
+            alert("onAfterFill called " + functionCallCount + " times");
+            functionCallCount = 0;
         },
         showCurrentReport: function () {
             var date = app.getDate(),
                 reportJSDO = app.reportJSDO;
-
+	
+            event.stopPropogation();
             //Read from the database and display the report currently in progress and status of each area
             function onAfterFill(jsdo, success, request) {
                 jsdo.foreach(function (report) {
@@ -70,7 +75,7 @@ var scanResult = 'No results yet';
                         else
                             span = completed;
 
-                        $("#reportStatusList").append(
+                        $("#reportStatusList").unbind().append(
                             "<li class='list-group-item'>" +
                             span +
                             report.data.LOCATION_ID +
