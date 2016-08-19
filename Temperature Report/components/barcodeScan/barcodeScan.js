@@ -50,13 +50,13 @@ var scanResult = 'No results yet';
             $("#reportStatusList").remove("li");
             app.scanBarcode.showCurrentReport();
         },
-        onHide: function() {
+        onHide: function () {
             //clear the list so it can be reloaded
         },
         showCurrentReport: function () {
             var date = app.getDate(),
                 reportJSDO = app.reportJSDO;
-			
+
             //Read from the database and display the report currently in progress and status of each area
             function onAfterFill(jsdo, success, request) {
                 jsdo.foreach(function (report) {
@@ -65,11 +65,11 @@ var scanResult = 'No results yet';
                         notCompleted = "",
                         span;
                     if (reportDate == date) {
-                        if(report.data.STAMP_TM == null)
+                        if (report.data.STAMP_TM == null)
                             span = notCompleted;
                         else
                             span = completed;
-                        
+
                         $("#reportStatusList").append(
                             "<li class='list-group-item'>" +
                             span +
@@ -108,7 +108,7 @@ var scanResult = 'No results yet';
                     var dataItem = this.dataItem(e.item.index());
                     locationID = dataItem.LOC_ID;
                     scanResult = locationID;
-                    $("#new-barcode").kendoMobileModalView("open");
+                    app.scanFail.initModal();
                 },
                 popup: {
                     appendTo: body
@@ -120,6 +120,16 @@ var scanResult = 'No results yet';
                 app.goToScan();
             });
 
+        },
+        initModal: function () {
+            $("#new-barcode").kendoMobileModalView("open");
+            $("#confirm-barcode-btn").unbind().click(function () {
+                if ($("#scan-modal-yes").is(':checked')) {
+                    app.scanFail.newBarcode();
+                } else if ($("#scan-modal-no").is(':checked')) {
+                    app.scanFail.noNewBarcode();
+                }
+            });
         },
         newBarcode: function () {
             var loc,

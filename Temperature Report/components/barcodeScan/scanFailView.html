@@ -22,9 +22,20 @@
         <h4>
         	New barcode for this location?
         </h4>
-        <div class="btn-group">
-            <button data-role="button" data-click="app.scanFail.newBarcode" id="new-barcode" class="btn btn-primary">Yes</button>
-            <button data-role="button" data-click="app.scanFail.noNewBarcode" id="no-new-barcode" class="btn btn-default">No</button>
+        <div id="scan-modal-buttons" class="btn-group btn-group-vertical" data-toggle="buttons">
+            <label class="btn active">
+                <input type="radio" name="scan" id="scan-modal-yes" checked="checked">
+                	<i class="fa fa-circle-o fa-2x"></i>
+                	<i class="fa fa-dot-circle-o fa-2x"></i>
+                <span> Yes</span>
+            </label>
+            <label class="btn">
+          		<input type="radio" name="scan" id="scan-modal-no">
+                	<i class="fa fa-circle-o fa-2x"></i>
+                	<i class="fa fa-dot-circle-o fa-2x"></i>
+                <span> No</span>
+        	</label>
         </div>
+        <button id="confirm-barcode-btn" class="btn btn-lg btn-block btn-primary">Continue</button>
     </div>
 </div>
