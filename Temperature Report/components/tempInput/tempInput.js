@@ -41,7 +41,7 @@
             });
 
             //Create the model and save the changes to the db
-            $("#ok-btn").unbind().click(function () {
+            $("#ok-button").unbind().click(function () {
                 var view = locDataSource.view(),
                     minTemp = view[0].TEMP_MIN - 5,
                     highTemp = view[0].TEMP_MAX,
@@ -72,14 +72,6 @@
                 } catch (exception) {
                     alert(exception.message);
                 }
-            });
-            
-            $("#cancel-btn").unbind().click(function () {
-                for (var field in reportModel) {
-                    var value = reportModel[value];
-                    delete value;
-                }
-                app.goToScan();
             });
 
         },

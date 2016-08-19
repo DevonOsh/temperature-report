@@ -47,11 +47,11 @@ var scanResult = 'No results yet';
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
+            $("#reportStatusList").remove("li");
             app.scanBarcode.showCurrentReport();
         },
         onHide: function() {
             //clear the list so it can be reloaded
-            kendo.unbind($("#barcodeScanView"));
         },
         showCurrentReport: function () {
             var date = app.getDate(),
@@ -71,7 +71,7 @@ var scanResult = 'No results yet';
                             span = completed;
                         
                         $("#reportStatusList").append(
-                            "<li id='list-item' class='list-group-item'>" +
+                            "<li class='list-group-item'>" +
                             span +
                             report.data.LOCATION_ID +
                             ' ' +
