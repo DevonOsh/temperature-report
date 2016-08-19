@@ -10,11 +10,12 @@
             });
             $("#view-reports-btn").unbind().click(function () {
                 app.goToGrid();
-            });
-                
+            });              
         },
         onHide: function () {
-
+			var locationJSDO = app.locJSDO;
+			var onAfterFill = app.welcome.sendReportInfo;
+            locationJSDO.subscribe('afterFill', onAfterFill, this);
         },
         getReportID: function () {
             var min = 10000,
@@ -23,13 +24,16 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
         createNewReport: function () {
-            var locationJSDO = app.locJSDO,
-                reportJSDO = app.reportJSDO,
-                date = app.getDate(),
-                reportID = app.welcome.getReportID();
+            var onAfterFill = app.welcome.sendReportInfo;
+            var locationJSDO = app.locJSDO;
 
-            function onAfterFill(jsdo, success, request) {                  
-                jsdo.foreach(function (location) {
+            locationJSDO.subscribe('afterFill', onAfterFill, this);
+            locationJSDO.fill();
+        },
+        sendReportInfo: function(jsdo, success, request) {
+            var date = app.getDate(),
+                reportID = app.welcome.getReportID();
+            jsdo.foreach(function (location) {
                     var model = {
                         LOCATION_ID: location.data.LOC_ID,
                         LOCATION_NAME: location.data.LOC_NAME,
@@ -41,10 +45,7 @@
                         REPORT_ID: reportID
                     }
                     app.sendReport(model);
-                });               
-            }
-            locationJSDO.subscribe('afterFill', onAfterFill, this);
-            locationJSDO.fill();
+                });   
         },
         checkForReport: function () {
             var date = app.getDate(),
