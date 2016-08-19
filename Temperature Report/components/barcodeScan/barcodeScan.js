@@ -5,7 +5,7 @@ var scanResult = 'No results yet';
         failViewModel,
         locationID,
         app = temp.app = temp.app || {};
-    
+
     var functionCallCount = 0;
 
     ScanViewModel = kendo.data.ObservableObject.extend({
@@ -49,45 +49,49 @@ var scanResult = 'No results yet';
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
-            
-            app.scanBarcode.showCurrentReport();
+
+            app.scanBarcode.getCurrentReport();
         },
         onHide: function () {
             //clear the list so it can be reloaded
             alert("onAfterFill called " + functionCallCount + " times");
             functionCallCount = 0;
+            var reportJSDO = app.reportJSDO,
+                onAfterFill = app.scanBarcode.writeOutReport;
+            reportJSDO.unsubscribe('afterFill', onAfterFill, this);
         },
-        showCurrentReport: function () {
-            var date = app.getDate(),
-                reportJSDO = app.reportJSDO;
-	
-            event.stopPropogation();
-            //Read from the database and display the report currently in progress and status of each area
-            function onAfterFill(jsdo, success, request) {
-                jsdo.foreach(function (report) {
-                    var reportDate = report.data.STAMP_DT,
-                        completed = "<span class='glyphicon glyphicon-ok'></span>",
-                        notCompleted = "",
-                        span;
-                    if (reportDate == date) {
-                        if (report.data.STAMP_TM == null)
-                            span = notCompleted;
-                        else
-                            span = completed;
+        getCurrentReport: function () {
+            var reportJSDO = app.reportJSDO,
+                onAfterFill = app.scanBarcode.writeOutReport;
 
-                        $("#reportStatusList").unbind().append(
-                            "<li class='list-group-item'>" +
-                            span +
-                            report.data.LOCATION_ID +
-                            ' ' +
-                            report.data.LOCATION_NAME +
-                            "</li>"
-                        );
-                    }
-                });
-            }
+            //Read from the database and display the report currently in progress and status of each area
+            
             reportJSDO.subscribe('afterFill', onAfterFill, this);
             reportJSDO.fill();
+        },
+        writeOutReport: function (jsdo, success, request) {
+            var date = app.getDate()
+            jsdo.foreach(function (report) {
+                var reportDate = report.data.STAMP_DT,
+                    completed = "<span class='glyphicon glyphicon-ok'></span>",
+                    notCompleted = "",
+                    span;
+                if (reportDate == date) {
+                    if (report.data.STAMP_TM == null)
+                        span = notCompleted;
+                    else
+                        span = completed;
+
+                    $("#reportStatusList").unbind().append(
+                        "<li class='list-group-item'>" +
+                        span +
+                        report.data.LOCATION_ID +
+                        ' ' +
+                        report.data.LOCATION_NAME +
+                        "</li>"
+                    );
+                }
+            });
         }
     }
 
