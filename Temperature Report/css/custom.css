@@ -1,0 +1,77 @@
+.km-root .k-dropdown .k-input {
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.km-root .k-dropdown-wrap,
+.km-root .k-dropdown .k-select {
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    display: block;
+}
+.button {
+    margin-left: .5em;
+    text-align: center;
+}
+.km-root .selected-button {
+    color: #fff;
+    background-color: #f60;
+}
+
+/* solid filled buttons in iOS7 should override the border-color */
+
+.km-ios7 .selected-button {
+    border-color: transparent;
+}
+.button:first-of-type {
+    margin-left: 1em;
+}
+.km-flat .km-popup .k-list-container {
+    height: 70% !important
+}
+.k-list-scroller {
+    height: 100% !important;
+}
+.km-modalview .km-scroll-container {
+    text-align: center;
+}
+.form-signin {
+    max-width: 400px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.btn-primary {
+    background: #10c4b2;
+    border-color: #0b8e81;
+}
+.btn-primary:hover {
+    background: #0b8e81;
+    border-color: #075f56;
+}
+.btn-xlg {
+    padding: 18px 28px;
+    font-size: 22px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+label.btn span {
+    font-size: 1.5em;
+}
+label input[type="radio"] ~ i.fa.fa-circle-o {
+    color: #c8c8c8;
+    display: inline;
+}
+label input[type="radio"] ~ i.fa.fa-dot-circle-o {
+    display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-circle-o {
+    display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o {
+    color: #7AA3CC;
+    display: inline;
+}
+label:hover input[type="radio"] ~ i.fa {
+    color: #7AA3CC;
+}

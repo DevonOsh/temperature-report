@@ -53,8 +53,11 @@
                 return (jsrecord.data.STAMP_DT == date);
             });
             
-            if(reportExists == null)
+            if(reportExists == null) {
                 app.welcome.createNewReport();
+                alert("New report created!")
+                app.goToScan();
+            }
             else {
                 alert("Today's report has already been started");
                 app.goToScan();
