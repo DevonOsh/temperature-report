@@ -14,28 +14,25 @@
             <button id="cancel-button" class="btn btn-xlg btn-default btn-block">Cancel</button>
         </div>
     </div>
-    <div id="temp-modal" data-role="modalview" id="range-warning" style="width: 70%; height: 33%">
+    <div data-role="modalview" id="range-warning" style="width: 70%; height: 33%">
         <h4>
             Temperature out of range! Keep value?
         </h4>
         <div id="temp-modal-buttons" class="btn-group btn-group-vertical" data-toggle="buttons">
             <label class="btn active">
-                <input type="radio" name="temp-out-range" id="temp-modal-yes" checked="checked">
+                <input type="radio" name="range" id="temp-modal-yes" checked="checked">
                 	<i class="fa fa-circle-o fa-2x"></i>
                 	<i class="fa fa-dot-circle-o fa-2x"></i>
                 <span> Yes</span>
             </label>
             <label class="btn">
-          		<input type="radio" name='temp-out-range' id="temp-modal-no">
+          		<input type="radio" name="range" id="temp-modal-no">
                 	<i class="fa fa-circle-o fa-2x"></i>
                 	<i class="fa fa-dot-circle-o fa-2x"></i>
                 <span> No</span>
         	</label>
         </div>
-        <div class="btn-group">
-            <button data-role="button" data-click="app.tempInput.confirm" id="confirm-btn" class="btn btn-primary">Confirm</button>
-            <button data-role="button" data-click="app.tempInput.cancel" id="cancel-btn" class="btn btn-default">Cancel</button>
-        </div>
+        <button id="confirm-temp-btn" class="btn btn-lg btn-block btn-primary">Continue</button>
     </div>
     <!-- non-functioning submit success modal
     <div id="infoSubmitted" data-role="modalview" data-popup='{"height": "500", "width":"300"}'>

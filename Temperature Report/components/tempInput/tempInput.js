@@ -67,7 +67,7 @@
                         app.tempInput.updateReport();
                         app.goToSubmitSuccess();
                     } else
-                        $("#range-warning").kendoMobileModalView("open");
+                        app.tempInput.initRangeModal();
 
                 } catch (exception) {
                     alert(exception.message);
@@ -113,6 +113,16 @@
             jsdo.saveLocal();
             jsdo.saveChanges();
             jsdo.acceptChanges();
+        },
+        initRangeModal: function() {
+            $("#range-warning").kendoMobileModalView("open");
+            $("#confirm-temp-btn").unbind().click(function () {
+                if ($("#temp-modal-yes").is(':checked')) {
+                    app.tempInput.confirm();
+                } else if ($("#temp-modal-no").is(':checked')) {
+                    app.tempInput.cancel();
+                }
+            });
         },
         confirm: function () {
             app.tempInput.updateReport();

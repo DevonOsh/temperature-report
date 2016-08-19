@@ -108,7 +108,7 @@ var scanResult = 'No results yet';
                     var dataItem = this.dataItem(e.item.index());
                     locationID = dataItem.LOC_ID;
                     scanResult = locationID;
-                    app.scanFail.initModal();
+                    app.scanFail.initBarcodeModal();
                 },
                 popup: {
                     appendTo: body
@@ -121,7 +121,7 @@ var scanResult = 'No results yet';
             });
 
         },
-        initModal: function () {
+        initBarcodeModal: function () {
             $("#new-barcode").kendoMobileModalView("open");
             $("#confirm-barcode-btn").unbind().click(function () {
                 if ($("#scan-modal-yes").is(':checked')) {
