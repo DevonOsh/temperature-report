@@ -15,6 +15,7 @@
                         jsdo: app.reportJSDO
                     }
                 },
+                toolbar: kendo.template($("#toolbarTemplate").html()),
                 height: windowHeight,
                 groupable: true,
                 mobile: true,
@@ -51,6 +52,10 @@
                         }
                     ]
             });
+        },
+        emailGrid: function() {
+            console.log("Email grid function fired");
+            window.location.href = "mailto:devono@ulfoods.com?body=This is a test";
         },
         onHide: function () {
             //What should happen once the view is hidden.

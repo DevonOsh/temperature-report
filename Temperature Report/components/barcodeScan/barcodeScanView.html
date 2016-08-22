@@ -1,12 +1,28 @@
 <div data-role="view" data-title="Scan Location" data-reload="true" data-layout="views-layout" data-model="app.scanBarcode.viewModel" data-show="app.scanBarcode.onShow" data-hide="app.scanBarcode.onHide">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
         <h3 class="hassubtitle">Begin Scan:</h3>
-        
         <button class="btn btn-xlg btn-primary btn-block" data-bind="click: scan">Scan</button>
         <button id="list-button" class="btn btn-lg btn-default btn-block">Skip</button>
     </div>
-    
-    <ul id="reportStatusList" class="col-xs-12 col-md-6 col-md-offset-3">
-        
-    </ul>
+
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <div data-role="collapsible" id="completed-collapsible">
+            <h2>
+            	Completed
+        	</h2>
+            <div data-role="scroller" id="completed-list"></div>
+        </div>
+        <div data-role="collapsible" id="uncompleted-collapsible">
+            <h2>
+            	Uncompleted
+        	</h2>
+            <div data-role="scroller" id="uncompleted-list"></div>
+        </div>
+        <div data-role="collapsible" id="all-collapsible">
+            <h2>
+            	All
+        	</h2>
+            <div data-role="scroller" id="all-list"></div>
+        </div>
+    </div>
 </div>

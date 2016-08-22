@@ -53,38 +53,51 @@ var scanResult = 'No results yet';
             app.scanBarcode.getCurrentReport();
         },
         onHide: function () {
-            //clear the list so it can be reloaded
-            alert("onAfterFill called " + functionCallCount + " times");
-            functionCallCount = 0;
             var reportJSDO = app.reportJSDO,
-                onAfterFill = app.scanBarcode.writeOutReport;
-            reportJSDO.unsubscribe('afterFill', onAfterFill, this);
+                writeOutReport = app.scanBarcode.writeOutReport;
+            reportJSDO.unsubscribe('afterFill', writeOutReport);
         },
         getCurrentReport: function () {
             var reportJSDO = app.reportJSDO,
-                onAfterFill = app.scanBarcode.writeOutReport;
+                writeOutReport = app.scanBarcode.writeOutReport;
 
-            //Read from the database and display the report currently in progress and status of each area
-            
-            reportJSDO.subscribe('afterFill', onAfterFill, this);
+            //Fill the JSDO from db and call function to  display the data
+            reportJSDO.subscribe('afterFill', writeOutReport);
             reportJSDO.fill();
         },
-        writeOutReport: function (jsdo, success, request) {
-            var date = app.getDate()
+        writeOutReport: function (jsdo, success, request) {            
+            var date = app.getDate();
             jsdo.foreach(function (report) {
                 var reportDate = report.data.STAMP_DT,
                     completed = "<span class='glyphicon glyphicon-ok'></span>",
                     notCompleted = "",
                     span;
                 if (reportDate == date) {
-                    if (report.data.STAMP_TM == null)
+                    if (report.data.STAMP_TM == null) {
                         span = notCompleted;
-                    else
+                        $("#uncompleted-list").append(
+                            "<li class='list-group-item'>" +
+                            span + " " +
+                            report.data.LOCATION_ID +
+                            ' ' +
+                            report.data.LOCATION_NAME +
+                            "</li>"
+                        );
+                    } else {
                         span = completed;
+                        $("#completed-list").append(
+                            "<li class='list-group-item'>" +
+                            span + " " +
+                            report.data.LOCATION_ID +
+                            ' ' +
+                            report.data.LOCATION_NAME +
+                            "</li>"
+                        );
+                    }
 
-                    $("#reportStatusList").unbind().append(
+                    $("#all-list").append(
                         "<li class='list-group-item'>" +
-                        span +
+                        span + " " +
                         report.data.LOCATION_ID +
                         ' ' +
                         report.data.LOCATION_NAME +
