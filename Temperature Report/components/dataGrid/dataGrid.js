@@ -1,9 +1,9 @@
 (function (temp, $) {
     var tempGrid = null,
         app = temp.app = temp.app || {};
-    
-    var windowHeight =  function () { 
-        return $(window).height(); 
+
+    var windowHeight = function () {
+        return $(window).height();
     }
 
     app.tempGrid = {
@@ -13,11 +13,13 @@
                     type: "jsdo",
                     transport: {
                         jsdo: app.reportJSDO
+                    },
+                    group: {
+                        field: "STAMP_DT"
                     }
                 },
                 toolbar: kendo.template($("#toolbarTemplate").html()),
                 height: windowHeight,
-                groupable: true,
                 mobile: true,
                 sortable: true,
                 resizable: true,
@@ -25,6 +27,15 @@
                     virtual: true
                 },
                 columns: [
+                    {
+                        field: "REPORT_ID",
+                        title: "Report ID"
+                    },
+                    {
+                        field: "STAMP_DT",
+                        format: "{0: yyyy-MM-dd}",
+                        title: "Date"
+                        },
                     {
                         field: "LOCATION_NAME",
                         title: "Location Name"
@@ -40,20 +51,13 @@
                     {
                         field: "EMPLOYEE",
                         title: "Employee"
-                        },
-                    {
-                        field: "STAMP_DT",
-                        format: "{0: yyyy-MM-dd}",
-                        title: "Date"
-                        },
-                    {
-                        field: "STAMP_TM",
-                        title: "Time"
                         }
                     ]
             });
+            var grid = $("#temp-grid").data("kendoGrid");
+            grid.collapseGroup(".k-grouping-row:first");
         },
-        emailGrid: function() {
+        emailGrid: function () {
             console.log("Email grid function fired");
             window.location.href = "mailto:devono@ulfoods.com?body=This is a test";
         },

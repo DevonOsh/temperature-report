@@ -56,7 +56,6 @@ var scanResult = 'No results yet';
             var reportJSDO = app.reportJSDO,
                 writeOutReport = app.scanBarcode.writeOutReport;
             reportJSDO.unsubscribe('afterFill', writeOutReport);
-            alert("Count: " + functionCallCount);
         },
         getCurrentReport: function () {
             var reportJSDO = app.reportJSDO,

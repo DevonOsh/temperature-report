@@ -33,7 +33,7 @@
         },
         sendReportInfo: function(jsdo, success, request) {
             var date = app.getDate(),
-                var reportID;
+                reportID;
                 
             reportID = app.welcome.getReportID();
 

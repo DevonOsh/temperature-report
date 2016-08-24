@@ -49,7 +49,6 @@
                     highTemp = view[0].TEMP_MAX,
                     enteredTemp = $("#tempInput").val(),
                     inRange;
-                alert("High " + highTemp + " Low " + minTemp);
 
                 try {
                     var isNumber = $.isNumeric(enteredTemp);
@@ -83,13 +82,16 @@
         //build the model to be sent to OE
         buildModel: function (data, temp, range) {
             var date = app.getDate();
-            var time = app.getTime();
+            var time = app.getTime(),
+                fName = app.userInfo.firstName,
+                lName = app.userInfo.lastName,
+                employee = fName + " " + lName;
             
 			reportModel.LOCATION_ID = data[0].LOC_ID;
             reportModel.LOCATION_NAME = data[0].LOC_NAME;
             reportModel.TEMP = temp;
             reportModel.IN_RANGE = range;
-            reportModel.EMPLOYEE = app.userInfo.userName;
+            reportModel.EMPLOYEE = employee;
             reportModel.STAMP_DT = date;
             reportModel.STAMP_TM = time;
             
