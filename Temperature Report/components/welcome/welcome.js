@@ -1,9 +1,7 @@
+
 (function (temp, $) {
     var welcome = null,
-        app = temp.app = temp.app || {},
-        check = 0,
-        create = 0,
-        send = 0;
+        app = temp.app = temp.app || {};
 
     app.welcome = {
         onShow: function () {
@@ -35,7 +33,9 @@
         },
         sendReportInfo: function(jsdo, success, request) {
             var date = app.getDate(),
-                reportID = app.welcome.getReportID();
+                var reportID;
+                
+            reportID = app.welcome.getReportID();
 
             jsdo.foreach(function (location) {
                     var model = {

@@ -105,7 +105,7 @@ var scanResult = 'No results yet';
 
     app.scanFail = {
         onShow: function () {
-
+			var date = app.getDate();
             var dataSource = new kendo.data.DataSource({
                 type: "jsdo",
                 serverFiltering: false,

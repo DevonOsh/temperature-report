@@ -31,6 +31,8 @@
                     value: scanResult
                 }
             });
+            
+            app.reportJSDO.fill();
 
             //Create a listview
             $("#resultListView").kendoListView({
@@ -91,8 +93,6 @@
             reportModel.STAMP_DT = date;
             reportModel.STAMP_TM = time;
             
-            //Filles the JSDO so that the update function can read from it.
-            app.reportJSDO.fill();
         },
         updateReport: function() {
             var jsdo = app.reportJSDO,
