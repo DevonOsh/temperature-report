@@ -56,6 +56,7 @@ var scanResult = 'No results yet';
             var reportJSDO = app.reportJSDO,
                 writeOutReport = app.scanBarcode.writeOutReport;
             reportJSDO.unsubscribe('afterFill', writeOutReport);
+            alert("Count: " + functionCallCount);
         },
         getCurrentReport: function () {
             var reportJSDO = app.reportJSDO,
@@ -65,44 +66,38 @@ var scanResult = 'No results yet';
             reportJSDO.subscribe('afterFill', writeOutReport);
             reportJSDO.fill();
         },
-        writeOutReport: function (jsdo, success, request) {            
+        writeOutReport: function (jsdo, success, request) {
             var date = app.getDate();
             jsdo.foreach(function (report) {
                 var reportDate = report.data.STAMP_DT,
                     completed = "<span class='glyphicon glyphicon-ok'></span>",
-                    notCompleted = "",
+                    notCompleted = " ",
                     span;
                 if (reportDate == date) {
-                    if (report.data.STAMP_TM == null) {
-                        span = notCompleted;
-                        $("#uncompleted-list").append(
-                            "<li class='list-group-item'>" +
-                            span + " " +
-                            report.data.LOCATION_ID +
-                            ' ' +
-                            report.data.LOCATION_NAME +
-                            "</li>"
-                        );
-                    } else {
+                    if (report.data.STAMP_TM !== null) {
                         span = completed;
                         $("#completed-list").append(
                             "<li class='list-group-item'>" +
                             span + " " +
                             report.data.LOCATION_ID +
                             ' ' +
-                            report.data.LOCATION_NAME +
+                            report.data.LOCATION_NAME + ' ' +
+                            report.data.STAMP_DT +
+                            "</li>"
+                        );
+                    } else {
+                        span = notCompleted;
+                        //$("#uncompleted-list li").remove();
+                        $("#uncompleted-list").append(
+                            "<li class='list-group-item'>" +
+                            span + " " +
+                            report.data.LOCATION_ID +
+                            ' ' +
+                            report.data.LOCATION_NAME + ' ' +
+                            report.data.STAMP_DT +                          
                             "</li>"
                         );
                     }
-
-                    $("#all-list").append(
-                        "<li class='list-group-item'>" +
-                        span + " " +
-                        report.data.LOCATION_ID +
-                        ' ' +
-                        report.data.LOCATION_NAME +
-                        "</li>"
-                    );
                 }
             });
         }
@@ -135,7 +130,7 @@ var scanResult = 'No results yet';
                 popup: {
                     appendTo: body
                 },
-                template: "<p>#:LOC_ID#: #:LOC_NAME#</p>"
+                template: "<p>#:LOC_ID#: #:LOC_NAME#</p>",
             });
 
             $("#back-to-scan").unbind().click(function () {

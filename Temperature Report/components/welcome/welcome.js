@@ -1,6 +1,9 @@
 (function (temp, $) {
     var welcome = null,
-        app = temp.app = temp.app || {};
+        app = temp.app = temp.app || {},
+        check = 0,
+        create = 0,
+        send = 0;
 
     app.welcome = {
         onShow: function () {
@@ -15,7 +18,7 @@
         onHide: function () {
 			var locationJSDO = app.locJSDO;
 			var onAfterFill = app.welcome.sendReportInfo;
-            locationJSDO.subscribe('afterFill', onAfterFill, this);
+            locationJSDO.unsubscribe('afterFill', onAfterFill);
         },
         getReportID: function () {
             var min = 10000,
@@ -27,12 +30,13 @@
             var onAfterFill = app.welcome.sendReportInfo;
             var locationJSDO = app.locJSDO;
 
-            locationJSDO.subscribe('afterFill', onAfterFill, this);
+            locationJSDO.subscribe('afterFill', onAfterFill);
             locationJSDO.fill();
         },
         sendReportInfo: function(jsdo, success, request) {
             var date = app.getDate(),
                 reportID = app.welcome.getReportID();
+
             jsdo.foreach(function (location) {
                     var model = {
                         LOCATION_ID: location.data.LOC_ID,
@@ -51,7 +55,7 @@
             var date = app.getDate(),
                 jsdo = app.reportJSDO;
             var reportExists = jsdo.find(function(jsrecord){
-                return (jsrecord.data.STAMP_DT == date);
+                return (jsrecord.data.STAMP_DT === date);
             });
             
             if(reportExists == null) {
