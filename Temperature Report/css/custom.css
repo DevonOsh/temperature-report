@@ -39,6 +39,13 @@
     padding: 15px;
     margin: 0 auto;
 }
+.k-dropdown-wrap {
+    height: 35px;
+}
+.k-dropdown-wrap .k-input {
+    height: 2em;
+    line-height: 2em;
+}
 .btn-primary {
     background: #10c4b2;
     border-color: #0b8e81;
@@ -60,7 +67,7 @@ label.btn span {
     font-size: 1.5em;
 }
 label input[type="radio"] ~ i.fa.fa-circle-o {
-    color: #c8c8c8;
+    color: #10c4b2;
     display: inline;
 }
 label input[type="radio"] ~ i.fa.fa-dot-circle-o {
@@ -70,9 +77,9 @@ label input[type="radio"]:checked ~ i.fa.fa-circle-o {
     display: none;
 }
 label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o {
-    color: #7AA3CC;
+    color: #0b8e81;
     display: inline;
 }
 label:hover input[type="radio"] ~ i.fa {
-    color: #7AA3CC;
+    color: #0b8e81;
 }
