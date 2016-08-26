@@ -106,12 +106,20 @@ var scanResult = 'No results yet';
     app.scanFail = {
         onShow: function () {
 			var date = app.getDate();
+            var reportID = app.scanFail.getReportID();
             var dataSource = new kendo.data.DataSource({
                 type: "jsdo",
                 serverFiltering: false,
                 serverSorting: false,
+                filter: {
+                    logic: "and",
+                    filters: [
+                        {field: "REPORT_ID", operator: "eq", value: reportID},
+                        {field: "TEMP", operator: "eq", value: null}
+                    ]
+                },
                 transport: {
-                    jsdo: app.locJSDO
+                    jsdo: app.reportJSDO
                 },
                 error: function (e) {
                     console.log("Error: ", e)
@@ -119,24 +127,35 @@ var scanResult = 'No results yet';
             });
 
             $("#locDropDown").kendoDropDownList({
-                dataTextField: "LOC_ID",
+                dataTextField: "LOCATION_ID",
                 dataSource: dataSource,
                 select: function (e) {
                     var dataItem = this.dataItem(e.item.index());
-                    locationID = dataItem.LOC_ID;
+                    locationID = dataItem.LOCATION_ID;
                     scanResult = locationID;
                     app.scanFail.initBarcodeModal();
                 },
                 popup: {
                     appendTo: body
                 },
-                template: "<p>#:LOC_ID#: #:LOC_NAME#</p>",
+                template: "<p>#:LOCATION_ID#: #:LOCATION_NAME#</p>",
             });
 
             $("#back-to-scan").unbind().click(function () {
                 app.goToScan();
             });
 
+        },
+        getReportID: function() {
+            var jsdo = app.reportJSDO,
+                report,
+                reportID,
+                date = app.getDate();
+            report = jsdo.find(function (jsrecord){
+                return (jsrecord.data.STAMP_DT == date);
+            });
+            reportID = report.data.REPORT_ID;
+            return reportID;
         },
         initBarcodeModal: function () {
             $("#new-barcode").kendoMobileModalView("open");
@@ -154,7 +173,6 @@ var scanResult = 'No results yet';
             loc = jsdo.find(function (jsrecord) {
                 return (jsrecord.data.LOC_ID == locationID);
             });
-            console.log(loc);
             var updateData = {
                 BARCODE_GOOD: false
             };
