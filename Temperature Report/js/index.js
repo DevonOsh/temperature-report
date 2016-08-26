@@ -92,4 +92,7 @@
     app.goToGrid = function() {
         application.navigate("components/dataGrid/dataGridView.html","slide");
     }
+    app.goBack = function() {
+        application.navigate("#:back");
+    }
 })(window);

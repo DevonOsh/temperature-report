@@ -49,7 +49,6 @@ var scanResult = 'No results yet';
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
-
             app.scanBarcode.getCurrentReport();
         },
         onHide: function () {

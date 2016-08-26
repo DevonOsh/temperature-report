@@ -74,6 +74,9 @@
                     alert(exception.message);
                 }
             });
+            $("#cancel-button").unbind().click(function(){
+                app.goBack();
+            });
 
         },
         onHide: function() {

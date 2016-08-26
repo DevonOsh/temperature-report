@@ -16,20 +16,18 @@
                     </label>
                 </li>
             </ul>
-                <a class="btn btn-primary btn-xlg btn-block" data-bind="events: { click: signin }">Sign In</a>
+            <a class="btn btn-primary btn-xlg btn-block" data-bind="events: { click: signin }">Sign In</a>
             <div id="errorMessage" style="visibility: hidden">
             </div>
         </form>
-
-        <div data-role="modalview" id="logout-window">
+        <div data-role="modalview" id="logout-window" style="width: 300px; height: 200px">
             <h4>
-                Are you sure you want to log out?
-            </h4>
+                		Are you sure you want to log out?
+            		</h4>
             <div class="btn-group">
-                <button data-role="button" data-click="app.loginViewModel.yesLogout" id="yes-logout-btn" class="btn btn-primary">Yes</button>
-                <button data-role="button" data-click="app.loginViewModel.noLogout" id="no-logout-btn" class="btn btn-default">No</button>
+                <button data-role="button" data-click="app.loginViewModel.yesLogout" id="yes-logout-btn" class="btn btn-lg btn-primary">Yes</button>
+                <button data-role="button" data-click="app.loginViewModel.noLogout" id="no-logout-btn" class="btn btn-lg btn-default">No</button>
             </div>
         </div>
-
     </div>
 </div>
