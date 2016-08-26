@@ -44,11 +44,13 @@ var scanResult = 'No results yet';
     app.scanBarcode = {
         viewModel: new ScanViewModel(),
         onShow: function () {
+            var date = app.getDate();
             app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
             app.locJSDO.fill();
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
+            $("#reportDate").html(date);
             app.scanBarcode.getCurrentReport();
         },
         onHide: function () {
