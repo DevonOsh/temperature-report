@@ -5,13 +5,11 @@
 
     app.welcome = {
         onShow: function () {
-            //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
             var reportJSDO = app.reportJSDO;
             var onAfterFill = app.welcome.createButtons;
             
             reportJSDO.subscribe('afterFill', onAfterFill);
-            reportJSDO.fill();
-            //app.welcome.createButtons();                        
+            reportJSDO.fill();                        
         },
         onHide: function () {
 			var locationJSDO = app.locJSDO,
