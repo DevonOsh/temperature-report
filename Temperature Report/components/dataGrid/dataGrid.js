@@ -5,22 +5,22 @@
     var windowHeight = function () {
         return $(window).height();
     }
+    
+    var gridDataSource = new kendo.data.DataSource({
+        type: "jsdo",
+        transport: {
+            jsdo: app.reportJSDO
+        }
+    });
 
     app.tempGrid = {
-        onShow: function () {
+        onShow: function () { 
             $("#temp-grid").kendoGrid({
-                dataSource: {
-                    type: "jsdo",
-                    transport: {
-                        jsdo: app.reportJSDO
-                    },
-                    group: {
-                        field: "STAMP_DT"
-                    }
-                },
-                toolbar: kendo.template($("#toolbarTemplate").html()),
+                dataSource: gridDataSource,
                 height: windowHeight,
                 mobile: true,
+                filterable: true,
+                groupable: true,
                 sortable: true,
                 resizable: true,
                 scrollable: {
@@ -28,8 +28,8 @@
                 },
                 columns: [
                     {
-                        field: "REPORT_ID",
-                        title: "Report ID"
+                        field: "LOCATION_ID",
+                        title: "Location ID"
                     },
                     {
                         field: "STAMP_DT",
@@ -57,13 +57,23 @@
             var grid = $("#temp-grid").data("kendoGrid");
             grid.collapseGroup(".k-grouping-row:first");
         },
-        emailGrid: function () {
-            console.log("Email grid function fired");
-            window.location.href = "mailto:devono@ulfoods.com?body=This is a test";
+        filterMenu: function (e) {
+            if (e.field == "STAMP_DT") {
+                var beginOperator = e.container.find("[data-role=dropdownlist]:eq(0)").data("kendoDropDownList");
+
+                beginOperator.value("gte");
+                beginOperator.trigger("change");
+
+                var endOperator = e.container.find("[data-role=dropdownlist].eq(2)").data("kendoDropDownList");
+
+                endOperator.value("lte");
+                endOperator.trigger("change");
+                debugger;
+                e.container.find(".k-dropdown").hide();
+            }
         },
         onHide: function () {
-            //What should happen once the view is hidden.
-            //Called from data-hide in HTML
+      
         }
     }
 })(window, jQuery);

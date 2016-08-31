@@ -5,18 +5,58 @@
 
     app.welcome = {
         onShow: function () {
-            app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
-            $("#create-report-btn").unbind().click(function () {
-                app.welcome.checkForReport();
-            });
-            $("#view-reports-btn").unbind().click(function () {
-                app.goToGrid();
-            });              
+            //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
+            var reportJSDO = app.reportJSDO;
+            var onAfterFill = app.welcome.createButtons;
+            
+            reportJSDO.subscribe('afterFill', onAfterFill);
+            reportJSDO.fill();
+            //app.welcome.createButtons();                        
         },
         onHide: function () {
-			var locationJSDO = app.locJSDO;
-			var onAfterFill = app.welcome.sendReportInfo;
-            locationJSDO.unsubscribe('afterFill', onAfterFill);
+			var locationJSDO = app.locJSDO,
+                reportJSDO = app.reportJSDO;
+			var onAfterLocationFill = app.welcome.sendReportInfo,
+                onAfterReportFill = app.welcome.createButtons;
+            locationJSDO.unsubscribe('afterFill', onAfterLocationFill);
+            reportJSDO.unsubscribe('afterFill', onAfterReportFill);
+        },
+        createButtons: function(jsdo, success, request) {
+            var reportExists,
+                report,
+                date = app.getDate();
+            
+            report = jsdo.find(function(jsrecord){
+                return (jsrecord.data.STAMP_DT == date);
+            })
+            
+            if(report == null)
+                reportExists = false;
+            else
+                reportExists = true;
+            
+            if(reportExists) {
+                $("#create-report-btn").html('Continue Report');
+                $("#create-report-btn").unbind().click(function(){
+                    app.goToScan();
+                });
+            }
+            else {
+                $("#create-report-btn").html('Begin Report');
+                $("#create-report-btn").unbind().click(function(){
+                    app.welcome.createNewReport();
+                    alert("New report created!");
+                    app.goToScan();
+                });
+            }
+
+            $("#view-reports-btn").unbind().click(function () {
+                app.goToGrid();
+            });
+            
+            $("#save-data-btn").unbind().click(function() {
+                app.exportData.saveGridData();
+            });
         },
         getReportID: function () {
             var min = 10000,
@@ -30,6 +70,7 @@
 
             locationJSDO.subscribe('afterFill', onAfterFill);
             locationJSDO.fill();
+            alert("New report created!");
         },
         sendReportInfo: function(jsdo, success, request) {
             var date = app.getDate(),
@@ -50,23 +91,6 @@
                     }
                     app.sendReport(model);
                 });   
-        },
-        checkForReport: function () {
-            var date = app.getDate(),
-                jsdo = app.reportJSDO;
-            var reportExists = jsdo.find(function(jsrecord){
-                return (jsrecord.data.STAMP_DT === date);
-            });
-            
-            if(reportExists == null) {
-                app.welcome.createNewReport();
-                alert("New report created!")
-                app.goToScan();
-            }
-            else {
-                alert("Today's report has already been started");
-                app.goToScan();
-            }
         }
     }
 })(window, jQuery);

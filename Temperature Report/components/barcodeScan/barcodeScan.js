@@ -81,8 +81,7 @@ var scanResult = 'No results yet';
                             span + " " +
                             report.data.LOCATION_ID +
                             ' ' +
-                            report.data.LOCATION_NAME + ' ' +
-                            report.data.STAMP_DT +
+                            report.data.LOCATION_NAME +
                             "</li>"
                         );
                     } else {
@@ -154,6 +153,7 @@ var scanResult = 'No results yet';
             report = jsdo.find(function (jsrecord){
                 return (jsrecord.data.STAMP_DT == date);
             });
+            console.log(report);
             reportID = report.data.REPORT_ID;
             return reportID;
         },

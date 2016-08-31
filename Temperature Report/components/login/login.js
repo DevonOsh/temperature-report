@@ -57,7 +57,7 @@
                     app.userInfo.firstName = user.data.FIRST_NAME;
                     app.userInfo.lastName = user.data.LAST_NAME;
                     app.userInfo.userName = USERNAME;
-                    app.goToScan();
+                    app.goToWelcome();
                 }
             } catch (exception) {
                 $("#errorMessage").html("<p>" + exception.message + "</p>");

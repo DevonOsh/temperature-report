@@ -50,6 +50,11 @@
     app.JSDOSession = new progress.data.Session();
     app.JSDOSession.login(app.JSDOSettings.serviceURI);
     app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
+    
+    //Check for a report and if it doesn't exists, create it
+    app.checkForReport = function() {
+        
+    }
 
     //Create all the JSDOs
     app.locJSDO = new progress.data.JSDO({
@@ -76,7 +81,9 @@
     app.goToLogin = function () {
         application.navigate("components/login/loginView.html", "slide");
     }
-
+	app.goToWelcome = function() {
+        application.navigate("components/welcome/welcomeView.html", "slide");
+    }
     app.goToTempInput = function () {
         application.navigate("components/tempInput/tempInputView.html", "slide");
     }
