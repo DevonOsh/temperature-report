@@ -26,8 +26,11 @@
         var currentDate = new Date(),
             yyyy = currentDate.getFullYear(),
             mm = getMonth(currentDate),
-            dd = currentDate.getDate(),
-            formatDate = yyyy + "-" + mm + "-" + dd;
+            dd = currentDate.getDate();
+        if (dd <= 9)
+            dd = '0'+dd;
+            
+        var formatDate = yyyy + "-" + mm + "-" + dd;
         return formatDate;
     }
 
@@ -50,11 +53,6 @@
     app.JSDOSession = new progress.data.Session();
     app.JSDOSession.login(app.JSDOSettings.serviceURI);
     app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
-    
-    //Check for a report and if it doesn't exists, create it
-    app.checkForReport = function() {
-        
-    }
 
     //Create all the JSDOs
     app.locJSDO = new progress.data.JSDO({
@@ -98,6 +96,9 @@
     }
     app.goToGrid = function() {
         application.navigate("components/dataGrid/dataGridView.html","slide");
+    }
+    app.goToEdit = function() {
+        application.navigate("componenets/completed/completedView.html", "slide");
     }
     app.goBack = function() {
         application.navigate("#:back");

@@ -21,7 +21,8 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "cordova-plugin-vibration",
-    "cordova-plugin-whitelist"
+    "cordova-plugin-whitelist",
+    "nl.x-services.plugins.socialsharing@5.1.1"
   ],
   "CordovaPluginVariables": {}
 }

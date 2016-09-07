@@ -6,7 +6,7 @@
   "DisplayName": "Temperature Report",
   "Author": "",
   "Description": "Temperature Report",
-  "BundleVersion": "1.0",
+  "BundleVersion": "2.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
