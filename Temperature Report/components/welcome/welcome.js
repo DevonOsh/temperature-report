@@ -36,25 +36,28 @@
             function checkReportCompletion() {
                 var completed;
                 report = jsdo.find(function (jsrecord) {
-                    return (jsrecord.data.TEMP == null)
+                    return (jsrecord.data.STAMP_DT == date && jsrecord.data.TEMP == null);
                 });
 
                 if (report == null)
                     completed = true;
                 else
                     completed = false;
+                console.log("Reported completed?: " + completed);
                 return completed;
             }
 
             if (reportExists) {
                 reportCompleted = checkReportCompletion();
+                $("#create-report-btn").html('Continue Report');
                 if (reportCompleted) {
-                    $("create-report-btn").html('Edit Report');
-                    $("create-report-btn").unbind().click(function () {
-                        app.goToEdit();
-                    });
+                    //$("create-report-btn").html('Edit Report');
+                    //$("create-report-btn").unbind().click(function () {
+                    //    app.goToEdit();
+                    //});
+                    alert("Today's report has been completed.");
+                    $("#create-report-btn").prop("disabled",true);
                 } else {
-                    $("#create-report-btn").html('Continue Report');
                     $("#create-report-btn").unbind().click(function () {
                         app.goToScan();
                     });

@@ -21,7 +21,6 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-vibration",
     "cordova-plugin-whitelist",
-    "nl.x-services.plugins.socialsharing@5.1.1"
-  ],
-  "CordovaPluginVariables": {}
+    "de.appplant.cordova.plugin.printer@0.7.2"
+  ]
 }
