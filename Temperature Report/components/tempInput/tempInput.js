@@ -35,7 +35,7 @@
             app.reportJSDO.fill();
             
             //check status of checkbox
-            app.tempInput.checkNegative();
+            //app.tempInput.checkNegative();
             
             //Create a listview
             $("#resultListView").kendoListView({
