@@ -84,12 +84,15 @@
     }
     app.goToTempInput = function () {
         application.navigate("components/tempInput/tempInputView.html", "slide");
+        alert("goToTempInput function.");
     }
     app.goToScan = function () {
         application.navigate("components/barcodeScan/barcodeScanView.html");
+        alert("goToScan function.");
     }
     app.goToScanFail = function () {
         application.navigate("components/barcodeScan/scanFailView.html", "slide");
+        alert("goToScanFail function.");
     }
     app.goToSubmitSuccess = function () {
         application.navigate("components/tempInput/successView.html", "slide");

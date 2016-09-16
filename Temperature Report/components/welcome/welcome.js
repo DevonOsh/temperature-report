@@ -49,7 +49,7 @@
 
             if (reportExists) {
                 reportCompleted = checkReportCompletion();
-                $("#create-report-btn").html('Continue Report');
+                $("#create-report-btn").html('Continue Temperature Report');
                 if (reportCompleted) {
                     //$("create-report-btn").html('Edit Report');
                     //$("create-report-btn").unbind().click(function () {
