@@ -6,7 +6,7 @@
   "DisplayName": "Temperature Report",
   "Author": "",
   "Description": "Temperature Report",
-  "BundleVersion": "3.0",
+  "BundleVersion": "1.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -42,6 +42,5 @@
     "ID_RESOLUTION_WVGA",
     "ID_RESOLUTION_WXGA",
     "ID_RESOLUTION_HD720P"
-  ],
-  "CordovaPluginVariables": {}
+  ]
 }

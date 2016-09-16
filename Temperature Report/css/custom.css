@@ -47,12 +47,12 @@
     line-height: 2em;
 }
 .btn-primary {
-    background: #10c4b2; !important
-    border-color: #0b8e81; !important
-} 
+    background: #10c4b2;
+    border-color: #0b8e81;
+}
 .btn-primary:hover {
-    background: #0b8e81; !important
-    border-color: #075f56; !important
+    background: #0b8e81;
+    border-color: #075f56;
 }
 .btn-xlg {
     padding: 18px 28px;

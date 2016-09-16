@@ -21,7 +21,7 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "cordova-plugin-vibration",
-    "cordova-plugin-whitelist",
-    "de.appplant.cordova.plugin.printer@0.7.2"
-  ]
+    "cordova-plugin-whitelist"
+  ],
+  "CordovaPluginVariables": {}
 }

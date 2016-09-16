@@ -17,7 +17,6 @@
         onShow: function () { 
             $("#temp-grid").kendoGrid({
                 dataSource: gridDataSource,
-                toolbar: kendo.template($("#toolbar-template").html()),
                 height: windowHeight,
                 mobile: true,
                 filterable: true,
@@ -57,10 +56,6 @@
             });
             var grid = $("#temp-grid").data("kendoGrid");
             grid.collapseGroup(".k-grouping-row:first");
-            
-            $('#printGrid').click(function () {
-        		app.tempGrid.print();
-    		});
         },
         filterMenu: function (e) {
             if (e.field == "STAMP_DT") {
@@ -78,18 +73,7 @@
             }
         },
         onHide: function () {
-      		
-        },
-        print: function() {
-            var printableContent = document.getElementById("temp-grid");
-            cordova.plugins.printer.print(
-                printableContent,
-                {
-                    name: "Temperature Report"
-                },
-                function(success) {console.log('OK: ' + success)},
-                function(error) {console.log('Error: ' + error)}
-            );
+      
         }
     }
 })(window, jQuery);

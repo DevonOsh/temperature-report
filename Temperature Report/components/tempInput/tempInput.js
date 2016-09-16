@@ -33,10 +33,7 @@
             });
             
             app.reportJSDO.fill();
-            
-            //check status of checkbox
-            //app.tempInput.checkNegative();
-            
+
             //Create a listview
             $("#resultListView").kendoListView({
                 dataSource: locDataSource,
@@ -50,7 +47,7 @@
                 var view = locDataSource.view(),
                     minTemp = view[0].TEMP_MIN - 5,
                     highTemp = view[0].TEMP_MAX,
-                    enteredTemp = $("#temp-input").val(),
+                    enteredTemp = $("#tempInput").val(),
                     inRange;
 
                 try {
@@ -82,30 +79,8 @@
             });
 
         },
-        checkNegative: function() {
-            var checkbox = $("#neg-box"),
-                isNegative = checkbox.is(":checked"),
-                mask;
-            
-            if(isNegative) {
-                mask = "###.##";
-            }
-            if(!isNegative){
-               	mask = "##.##";  
-            }
-            
-            app.tempInput.createTextBox(mask);
-        },
-        createTextBox: function(inputMask) {
-           	$("#temp-input").kendoMaskedTextBox({
-                mask: inputMask
-            });
-            $("#neg-box").change(function() {
-                app.tempInput.checkNegative();
-        	});
-        },
         onHide: function() {
-            $("#temp-input").val('');
+            $("#tempInput").val('');
         },
         //build the model to be sent to OE
         buildModel: function (data, temp, range) {
@@ -161,7 +136,7 @@
         },
         cancel: function () {
             $("#range-warning").kendoMobileModalView("close");
-            $("#temp-input").val('');
+            $("#tempInput").val('');
         }
     }
 
