@@ -26,8 +26,11 @@
         var currentDate = new Date(),
             yyyy = currentDate.getFullYear(),
             mm = getMonth(currentDate),
-            dd = currentDate.getDate(),
-            formatDate = yyyy + "-" + mm + "-" + dd;
+            dd = currentDate.getDate();
+        if (dd <= 9)
+            dd = '0'+dd;
+            
+        var formatDate = yyyy + "-" + mm + "-" + dd;
         return formatDate;
     }
 
@@ -50,11 +53,6 @@
     app.JSDOSession = new progress.data.Session();
     app.JSDOSession.login(app.JSDOSettings.serviceURI);
     app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
-    
-    //Check for a report and if it doesn't exists, create it
-    app.checkForReport = function() {
-        
-    }
 
     //Create all the JSDOs
     app.locJSDO = new progress.data.JSDO({
@@ -79,25 +77,28 @@
 
     //All navigation functions
     app.goToLogin = function () {
-        application.navigate("components/login/loginView.html", "slide");
+        application.navigate("components/login/loginView.html");
     }
 	app.goToWelcome = function() {
-        application.navigate("components/welcome/welcomeView.html", "slide");
+        application.navigate("components/welcome/welcomeView.html");
     }
     app.goToTempInput = function () {
-        application.navigate("components/tempInput/tempInputView.html", "slide");
+        application.navigate("components/tempInput/tempInputView.html");
     }
     app.goToScan = function () {
         application.navigate("components/barcodeScan/barcodeScanView.html");
     }
     app.goToScanFail = function () {
-        application.navigate("components/barcodeScan/scanFailView.html", "slide");
+        application.navigate("components/barcodeScan/scanFailView.html");
     }
     app.goToSubmitSuccess = function () {
-        application.navigate("components/tempInput/successView.html", "slide");
+        application.navigate("components/tempInput/successView.html");
     }
     app.goToGrid = function() {
-        application.navigate("components/dataGrid/dataGridView.html","slide");
+        application.navigate("components/dataGrid/dataGridView.html");
+    }
+    app.goToEdit = function() {
+        application.navigate("componenets/completed/completedView.html");
     }
     app.goBack = function() {
         application.navigate("#:back");

@@ -25,13 +25,6 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     
     <!--Styles-->
-    <link rel="stylesheet" type="text/css" href="css/kendo.common.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/kendo.default.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/kendo.mobile.all.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/custom.css" />
     
     <!--Frameworks-->
     <script type="text/javascript" src="cordova.js"></script>
@@ -47,16 +40,29 @@
     <script src="components/tempInput/tempInput.js"></script>
     <script src="components/dataGrid/dataGrid.js"></script>
     <script src="components/welcome/welcome.js"></script>
+    <script src="components/dataGrid/printGrid.js"></script>
     <title>Temperature Report</title>
 </head>
 
 <body id="body">
+    
+    <!--Styles declared in body so grid will print properly-->
+    <link rel="stylesheet" type="text/css" href="css/kendo.common.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/kendo.default.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/kendo.mobile.all.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <link rel="stylesheet" type="text/css" media="print" href="css/print.css"/>
+    
     <div data-role="view"></div>
     <!--Main Layout-->
     <div data-role="layout" data-id="views-layout">
         <!--Header-->
         <div data-role="header">
             <div data-role="navbar">
+                <a data-role="backbutton" data-align="left">Back</a>
                 <span data-role="view-title"></span>
                 <button data-role="button" data-click="app.loginViewModel.logout" data-align="right">
                 	Logout

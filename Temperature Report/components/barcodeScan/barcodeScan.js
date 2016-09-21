@@ -67,7 +67,8 @@ var scanResult = 'No results yet';
             reportJSDO.fill();
         },
         writeOutReport: function (jsdo, success, request) {
-            var date = app.getDate();
+            var date = app.getDate(),
+                incompleteCount = 0;
             jsdo.foreach(function (report) {
                 var reportDate = report.data.STAMP_DT,
                     completed = "<span class='glyphicon glyphicon-ok'></span>",
@@ -92,13 +93,15 @@ var scanResult = 'No results yet';
                             span + " " +
                             report.data.LOCATION_ID +
                             ' ' +
-                            report.data.LOCATION_NAME + ' ' +
-                            report.data.STAMP_DT +                          
+                            report.data.LOCATION_NAME +                         
                             "</li>"
                         );
+                        incompleteCount ++;
                     }
                 }
             });
+            if(incompleteCount == 0)
+                app.goToWelcome();
         }
     }
 
@@ -144,6 +147,17 @@ var scanResult = 'No results yet';
                 app.goToScan();
             });
 
+        },
+        onHide: function() {
+            var dropDown = $("#locDropDown").data("kendoDropDownList"),
+                popup = dropDown.popup,
+                element = popup.wrapper[0] ? popup.wrapper : popup.element;
+            
+            element.remove();
+            
+            dropDown.element.show().insertBefore(dropDown.wrapper);
+            dropDown.wrapper.remove();
+            dropDown.element.removeData("kendoDropDownList");
         },
         getReportID: function() {
             var jsdo = app.reportJSDO,
