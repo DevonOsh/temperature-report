@@ -30,15 +30,22 @@
             lastReportID = jsdo.record.data.REPORT_ID;
             console.log("Last report ID: " + lastReportID);
             
-			//Look for a report bearing the current date
-            report = jsdo.find(function (jsrecord) {
-                return (jsrecord.data.STAMP_DT == date);
-            });
-
-            if (report == null)
+            //if there are no reports, start at 10000
+            if(lastReportID === 1) {
                 reportExists = false;
-            else
-                reportExists = true;
+                lastReportID = 10000;
+            }
+            //If there are reports, is there one for today?
+            else {
+                report = jsdo.find(function (jsrecord) {
+                    return (jsrecord.data.STAMP_DT == date);
+                });
+
+                if (report == null)
+                    reportExists = false;
+                else
+                    reportExists = true;
+            }
             
 			//Check to see if the report has been completed
             function checkReportCompletion() {
@@ -55,14 +62,17 @@
                 return completed;
             }
 
-            if (reportExists) { //If the report exists, create continue report btn
+            //If the report exists, create continue report btn
+            if (reportExists) { 
                 reportCompleted = checkReportCompletion();
                 $("#create-report-btn").html('Continue Temperature Report');
                 
-                if (reportCompleted) { //If report completed, disable button and display alert
+                //If report completed, disable button and display alert
+                if (reportCompleted) { 
                     alert("Today's report has been completed.");
                     $("#create-report-btn").prop("disabled",true);
-                } else { //If not completed, button enabled and brins user to scan screen
+                //If not completed, button enabled and brins user to scan screen
+                } else { 
                     $("#create-report-btn").unbind().click(function () {
                         app.goToScan();
                     });
