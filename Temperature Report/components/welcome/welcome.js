@@ -2,13 +2,16 @@
     var welcome = null,
         app = temp.app = temp.app || {},
         locationJSDO = app.locJSDO,
-        reportJSDO = app.reportJSDO;
+        reportJSDO = app.reportJSDO,
+        lastReportID;
 
     app.welcome = {
-        onShow: function () {
+        onInit: function () {
             //Fill the data from the reportJSDO and when done, call createButtons
             var onAfterReportFill = app.welcome.createButtons;
             reportJSDO.subscribe('afterFill', onAfterReportFill);
+            reportJSDO.autoSort = true;
+            reportJSDO.setSortFields(["STAMP_DT:DESCENDING","LOCATION_ID:ASCENDING"]);
             reportJSDO.fill();
         },
         onHide: function () {
@@ -22,6 +25,10 @@
                 reportCompleted,
                 report,
                 date = app.getDate();
+            
+            //First, assign ID of the most recently created record to lastReportID
+            lastReportID = jsdo.record.data.REPORT_ID;
+            console.log("Last report ID: " + lastReportID);
             
 			//Look for a report bearing the current date
             report = jsdo.find(function (jsrecord) {
@@ -80,10 +87,12 @@
             });
         },
         getReportID: function () { //Creates a random ID for the current report
-            var min = 10000,
-                max = 99999;
-
-            return Math.floor(Math.random() * (max - min + 1)) + min;
+            //var min = 10000,
+            //    max = 99999;
+            //return Math.floor(Math.random() * (max - min + 1)) + min;
+            
+            var currentReportID = lastReportID + 1;
+            return currentReportID;
         },
         createNewReport: function () {
             var onAfterLocationFill = app.welcome.sendReportInfo;
