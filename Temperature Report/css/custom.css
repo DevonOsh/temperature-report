@@ -88,3 +88,11 @@ label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o {
 label:hover input[type="radio"] ~ i.fa {
     color: #0b8e81;
 }
+
+.km-barcode:after, .km-barcode:before {
+    content: "\e104";
+}
+
+.km-table-icon:after, .km-table-icon:before {
+    content: "\e0ab";
+}
