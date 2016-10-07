@@ -14,6 +14,13 @@
     });
 
     app.tempGrid = {
+        afterShow: function(){
+            //var grid = $("#temp-grid").data("kendoGrid");
+            //grid.dataSource.read();
+            //grid.refresh();
+
+            $("#temp-grid").data("kendoGrid").dataSource.read();
+        },
         onShow: function () { 
             $("#temp-grid").kendoGrid({
                 dataSource: gridDataSource,
@@ -62,8 +69,8 @@
         },
         onHide: function () {
       		var grid = $("#temp-grid").data("kendoGrid");
-            grid.dataSource.read();
-            //grid.refresh();
+            grid.dataSource.sync();
+            grid.refresh();
         },
         print: function() {
             var printableContent = document.getElementById("temp-grid");

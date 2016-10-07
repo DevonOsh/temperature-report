@@ -38,7 +38,6 @@ var scanResult = 'No results yet';
                 }
             );
         }
-
     });
 
     app.scanBarcode = {
@@ -167,7 +166,7 @@ var scanResult = 'No results yet';
             report = jsdo.find(function (jsrecord){
                 return (jsrecord.data.STAMP_DT == date);
             });
-            console.log(report);
+            console.log(report);            //FIXME remove if data displayed
             reportID = report.data.REPORT_ID;
             return reportID;
         },
