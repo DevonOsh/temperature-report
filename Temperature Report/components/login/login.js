@@ -24,8 +24,9 @@
             return true;
         },
         onShow: function () {
-            app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
+            //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);     FIXME if ok
             app.loginJSDO.fill();
+            app.reportJSDO.setSortFields(["STAMP_DT:DESCENDING","LOCATION_ID:ASCENDING"]);
         },
         signin: function () {
             var model = app.loginViewModel,

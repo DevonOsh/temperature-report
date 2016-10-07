@@ -66,10 +66,11 @@
     app.reportJSDO = new progress.data.JSDO({
         name: "Temperature_Report"
     });
+    app.reportJSDO.autoSort = true;
 
     //send report back to database
     app.sendReport = function (reportModel) {
-        app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
+        //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);     FIXME remove if ok
 
         app.reportJSDO.create(reportModel);
         app.reportJSDO.saveChanges();

@@ -45,7 +45,7 @@ var scanResult = 'No results yet';
         viewModel: new ScanViewModel(),
         onShow: function () {
             var date = app.getDate();
-            app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);
+            //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);     FIXME remove if ok
             app.locJSDO.fill();
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();

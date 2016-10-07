@@ -10,8 +10,6 @@
             //Fill the data from the reportJSDO and when done, call createButtons
             var onAfterReportFill = app.welcome.createButtons;
             reportJSDO.subscribe('afterFill', onAfterReportFill);
-            reportJSDO.autoSort = true;
-            reportJSDO.setSortFields(["STAMP_DT:DESCENDING","LOCATION_ID:ASCENDING"]);
             reportJSDO.fill();
         },
         onHide: function () {
@@ -46,7 +44,6 @@
                 else
                     reportExists = true;
             }
-            console.log("Report Exists: " + reportExists); //FIXME Remove
             
 			//Check to see if the report has been completed
             function checkReportCompletion() {
