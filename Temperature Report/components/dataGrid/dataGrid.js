@@ -14,14 +14,14 @@
     });
 
     app.tempGrid = {
-        afterShow: function(){
+        onShow: function(){
             //var grid = $("#temp-grid").data("kendoGrid");
             //grid.dataSource.read();
             //grid.refresh();
 
             $("#temp-grid").data("kendoGrid").dataSource.read();
         },
-        onShow: function () { 
+        onInit: function () { 
             $("#temp-grid").kendoGrid({
                 dataSource: gridDataSource,
                 height: windowHeight,
