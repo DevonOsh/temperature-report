@@ -140,9 +140,14 @@
                 return (jsrecord.data.LOCATION_ID == locationID && jsrecord.data.STAMP_DT == date);
             });
             jsdo.assign(updateData);
-            jsdo.saveLocal();
-            jsdo.saveChanges();
-            jsdo.acceptChanges();
+            //jsdo.saveLocal();
+            jsdo.saveChanges().done(function() {
+                alert("Data was sent successfully.");
+            }).fail( function() {
+                jsdo.saveLocal();
+                alert("Data was saved locally.");
+            });
+            //jsdo.acceptChanges();
         },
         initRangeModal: function() {
             $("#range-warning").kendoMobileModalView("open");
