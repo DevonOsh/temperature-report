@@ -46,6 +46,7 @@ var scanResult = 'No results yet';
             var date = app.getDate();
             //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);     FIXME remove if ok
             app.locJSDO.fill();
+            app.locJSDO.saveLocal();
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });

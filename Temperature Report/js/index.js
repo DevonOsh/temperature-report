@@ -64,7 +64,8 @@
     });
 
     app.reportJSDO = new progress.data.JSDO({
-        name: "Temperature_Report"
+        name: "Temperature_Report",
+        autoApplyChanges: false
     });
     app.reportJSDO.autoSort = true;
 
@@ -74,6 +75,7 @@
 
         app.reportJSDO.create(reportModel);
         app.reportJSDO.saveChanges();
+        app.reportJSDO.acceptChanges();
     }
 
     //All navigation functions
