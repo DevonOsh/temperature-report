@@ -16,24 +16,6 @@
         kendo.mobile.init(application.element.children("[data-role=modalview]"));
     });
 
-    app.getDate2 = function() {
-        function getMonth(date) {
-            var month = date.getMonth() + 1;
-            return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
-        }
-
-        var currentDate = new Date(),
-            yyyy = (currentDate.getFullYear()).toString(),
-            mm = getMonth(currentDate),
-            dd = currentDate.getDate(),
-            yy = yyyy.substring(0,2);
-        if (dd <= 9)
-            dd = '0'+dd;
-            
-        var formatDate = mm + "/" + dd + "/" + yy;
-        return formatDate;
-    }
-
     app.getDate = function () {
 
         function getMonth(date) {
@@ -82,8 +64,7 @@
     });
 
     app.reportJSDO = new progress.data.JSDO({
-        name: "Temperature_Report",
-        autoApplyChanges: false
+        name: "Temperature_Report"
     });
     app.reportJSDO.autoSort = true;
 
@@ -93,7 +74,6 @@
 
         app.reportJSDO.create(reportModel);
         app.reportJSDO.saveChanges();
-        app.reportJSDO.acceptChanges();
     }
 
     //All navigation functions

@@ -142,7 +142,6 @@
             jsdo.assign(updateData);
             //jsdo.saveLocal();
             jsdo.saveChanges().done(function() {
-                jsdo.acceptChanges();
                 alert("Data was sent successfully.");
             }).fail( function() {
                 jsdo.saveLocal();

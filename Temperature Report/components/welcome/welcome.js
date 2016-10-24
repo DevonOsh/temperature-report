@@ -106,7 +106,6 @@
             var onAfterLocationFill = app.welcome.sendReportInfo;
             locationJSDO.subscribe('afterFill', onAfterLocationFill);
             locationJSDO.fill();
-            locationJSDO.saveLocal();
             alert("New report created!");
         },
         sendReportInfo: function (jsdo, success, request) {

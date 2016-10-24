@@ -46,7 +46,6 @@ var scanResult = 'No results yet';
             var date = app.getDate();
             //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);     FIXME remove if ok
             app.locJSDO.fill();
-            app.locJSDO.saveLocal();
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
             });
@@ -60,22 +59,21 @@ var scanResult = 'No results yet';
         },
         getCurrentReport: function () {
             var reportJSDO = app.reportJSDO,
-                writeOutReport = app.scanBarcode.writeOutReport,
-                date = app.getDate2();
+                writeOutReport = app.scanBarcode.writeOutReport;
 
             //Fill the JSDO from db and call function to  display the data
             reportJSDO.subscribe('afterFill', writeOutReport);
-            reportJSDO.fill("REPORT_ID = 10008");
+            reportJSDO.fill();
         },
         writeOutReport: function (jsdo, success, request) {
-            var //date = app.getDate(),
+            var date = app.getDate(),
                 incompleteCount = 0;
             jsdo.foreach(function (report) {
-                var //reportDate = report.data.STAMP_DT,
+                var reportDate = report.data.STAMP_DT,
                     completed = "<span class='glyphicon glyphicon-ok'></span>",
                     notCompleted = " ",
                     span;
-                //if (reportDate == date) {
+                if (reportDate == date) {
                     if (report.data.STAMP_TM !== null) {
                         span = completed;
                         $("#completed-list").append(
@@ -99,7 +97,7 @@ var scanResult = 'No results yet';
                         );
                         incompleteCount ++;
                     }
-                //}
+                }
             });
             if(incompleteCount == 0)
                 app.goToWelcome();
