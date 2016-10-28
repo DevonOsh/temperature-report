@@ -61,9 +61,11 @@ var scanResult = 'No results yet';
             var reportJSDO = app.reportJSDO,
                 writeOutReport = app.scanBarcode.writeOutReport;
 
+            var date = app.getDate();
+
             //Fill the JSDO from db and call function to  display the data
             reportJSDO.subscribe('afterFill', writeOutReport);
-            reportJSDO.fill();
+            reportJSDO.fill("STAMP_DT = " + date);
         },
         writeOutReport: function (jsdo, success, request) {
             var date = app.getDate(),

@@ -27,10 +27,13 @@
             yyyy = currentDate.getFullYear(),
             mm = getMonth(currentDate),
             dd = currentDate.getDate();
+
+            yyyy = yyyy.toString();
+            yy = yyyy.substring(2,4);
         if (dd <= 9)
             dd = '0'+dd;
             
-        var formatDate = yyyy + "-" + mm + "-" + dd;
+        var formatDate = mm + "/" + dd + "/" + yy;
         return formatDate;
     }
 

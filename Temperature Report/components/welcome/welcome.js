@@ -9,6 +9,7 @@
         onInit: function () {
             //Fill the data from the reportJSDO and when done, call createButtons
             var onAfterReportFill = app.welcome.createButtons;
+            var date = app.getDate();
             reportJSDO.subscribe('afterFill', onAfterReportFill);
             reportJSDO.fill();
         },
