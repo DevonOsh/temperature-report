@@ -27,13 +27,32 @@
             yyyy = currentDate.getFullYear(),
             mm = getMonth(currentDate),
             dd = currentDate.getDate();
-
-            yyyy = yyyy.toString();
-            yy = yyyy.substring(2,4);
         if (dd <= 9)
             dd = '0'+dd;
             
+        var formatDate = yyyy + "-" + mm + "-" + dd;
+        return formatDate;
+    }
+
+    app.getFilterDate = function() {
+        function getMonth(date) {
+            var month = date.getMonth() + 1;
+            return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
+        }
+
+        var currentDate = new Date(),
+            yyyy = currentDate.getFullYear(),
+            mm = getMonth(currentDate),
+            dd = currentDate.getDate();
+        if (dd <= 9) {
+            dd = '0'+dd;
+        }
+
+        yyyy = yyyy.toString();
+        var yy = yyyy.substring(2,4);
+            
         var formatDate = mm + "/" + dd + "/" + yy;
+        alert(formatDate);
         return formatDate;
     }
 

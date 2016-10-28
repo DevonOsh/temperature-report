@@ -31,8 +31,10 @@
                     value: scanResult
                 }
             });
+
+            var date = app.getFilterDate();
             
-            app.reportJSDO.fill();
+            app.reportJSDO.fill("STAMP_DT = " + date);
             
             //check status of checkbox
             //app.tempInput.checkNegative();

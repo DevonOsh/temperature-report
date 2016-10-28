@@ -60,12 +60,11 @@ var scanResult = 'No results yet';
         getCurrentReport: function () {
             var reportJSDO = app.reportJSDO,
                 writeOutReport = app.scanBarcode.writeOutReport;
-
-            var date = app.getDate();
+            var date = app.getFilterDate();   //TESTING for use with filter string
 
             //Fill the JSDO from db and call function to  display the data
             reportJSDO.subscribe('afterFill', writeOutReport);
-            reportJSDO.fill("STAMP_DT = " + date);
+            reportJSDO.fill("STAMP_DT = " + date);      //TESTING added filter string
         },
         writeOutReport: function (jsdo, success, request) {
             var date = app.getDate(),
