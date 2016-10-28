@@ -17,43 +17,17 @@
     });
 
     app.getDate = function () {
-
-        function getMonth(date) {
-            var month = date.getMonth() + 1;
-            return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
-        }
-
-        var currentDate = new Date(),
-            yyyy = currentDate.getFullYear(),
-            mm = getMonth(currentDate),
-            dd = currentDate.getDate();
-        if (dd <= 9)
-            dd = '0'+dd;
-            
-        var formatDate = yyyy + "-" + mm + "-" + dd;
-        return formatDate;
+        var currentDate = new Date();
+        var dateString = kendo.toString(currentDate, "yyyy-MM-dd");
+        alert(dateString);
+        return dateString;
     }
 
     app.getFilterDate = function() {
-        function getMonth(date) {
-            var month = date.getMonth() + 1;
-            return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
-        }
-
-        var currentDate = new Date(),
-            yyyy = currentDate.getFullYear(),
-            mm = getMonth(currentDate),
-            dd = currentDate.getDate();
-        if (dd <= 9) {
-            dd = '0'+dd;
-        }
-
-        yyyy = yyyy.toString();
-        var yy = yyyy.substring(2,4);
-            
-        var formatDate = mm + "/" + dd + "/" + yy;
-        alert(formatDate);
-        return formatDate;
+        var currentDate = new Date();
+        var dateString = kendo.toString(currentDate, "MM/dd/yy");
+        alert(dateString);
+        return dateString;
     }
 
     app.getTime = function () {
