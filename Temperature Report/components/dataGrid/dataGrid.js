@@ -64,7 +64,7 @@
     		});
         },
         onHide: function () {
-      		//var grid = $("#temp-grid").data("kendoGrid");
+      		var grid = $("#temp-grid").data("kendoGrid");
             //grid.dataSource.sync();
             //grid.refresh();
             app.reportJSDO.fill();
