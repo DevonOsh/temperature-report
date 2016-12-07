@@ -24,7 +24,6 @@
             return true;
         },
         onShow: function () {
-            //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);     FIXME if ok
             app.loginJSDO.fill();
             app.reportJSDO.setSortFields(["STAMP_DT:DESCENDING","LOCATION_ID:ASCENDING"]);
         },
@@ -32,18 +31,16 @@
             var model = app.loginViewModel,
                 userName = model.userName,
                 password = model.password;
+            var user;
+            var USERNAME, PASSWORD;
 
             if (!model.validateData(model)) {
                 return false;
             }
 
-            var user;
-
             user = app.loginJSDO.find(function (jsrecord) {
                 return (jsrecord.data.USERNAME == userName);
             });
-
-            var USERNAME, PASSWORD;
 
             try {
                 if (user == null)

@@ -17,16 +17,19 @@
     });
 
     app.getDate = function () {
+        //This function formats the current date such 
+        //that OpenEdge will accept in when adding to the database
         var currentDate = new Date();
         var dateString = kendo.toString(currentDate, "yyyy-MM-dd");
-        alert(dateString);
         return dateString;
     }
 
     app.getFilterDate = function() {
+        //This function formats the current date such 
+        //that it can be used to query OpenEdge 
+        //with a filter in a jsdo fill
         var currentDate = new Date();
         var dateString = kendo.toString(currentDate, "MM/dd/yy");
-        alert(dateString);
         return dateString;
     }
 

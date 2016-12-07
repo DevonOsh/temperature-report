@@ -47,11 +47,11 @@
     line-height: 2em;
 }
 
-
 .btn-primary {
     background: #10c4b2; !important
     border-color: #0b8e81; !important
 } 
+
 .btn-primary:hover {
     background: #0b8e81; !important
     border-color: #075f56; !important
@@ -70,7 +70,7 @@ label.btn span {
     font-size: 1.5em;
 }
 
-//Custom radio buttons for modals
+/*Custom radio buttons for modals*/
 label input[type="radio"] ~ i.fa.fa-circle-o {
     color: #10c4b2;
     display: inline;

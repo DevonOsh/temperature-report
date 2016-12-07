@@ -44,7 +44,6 @@ var scanResult = 'No results yet';
         viewModel: new ScanViewModel(),
         onShow: function () {
             var date = app.getDate();
-            //app.JSDOSession.addCatalog(app.JSDOSettings.catalogURIs);     FIXME remove if ok
             app.locJSDO.fill();
             $("#list-button").unbind().click(function () {
                 app.goToScanFail();
@@ -53,6 +52,7 @@ var scanResult = 'No results yet';
             app.scanBarcode.getCurrentReport();
         },
         onHide: function () {
+            //unsubscribe from jsdo events
             var reportJSDO = app.reportJSDO,
                 writeOutReport = app.scanBarcode.writeOutReport;
             reportJSDO.unsubscribe('afterFill', writeOutReport);
@@ -67,8 +67,16 @@ var scanResult = 'No results yet';
             reportJSDO.fill("STAMP_DT = " + date);      //TESTING added filter string
         },
         writeOutReport: function (jsdo, success, request) {
+            //callback for fill in getCurrentReport
             var date = app.getDate(),
                 incompleteCount = 0;
+
+            //loops through each record in the jsdo and looks for reports that match today's date
+            //FIXME the above is no longer necessary, as reportJSDO is filtered when the fill function is called
+            //if the STAMP_TM field is not empty in the record, then that location has been checked
+            //      add it to the complete list
+            //otherwise add it to the incomplete list
+            //keep track of how many are completed
             jsdo.foreach(function (report) {
                 var reportDate = report.data.STAMP_DT,
                     completed = "<span class='glyphicon glyphicon-ok'></span>",
@@ -167,7 +175,6 @@ var scanResult = 'No results yet';
             report = jsdo.find(function (jsrecord){
                 return (jsrecord.data.STAMP_DT == date);
             });
-            console.log(report);            //FIXME remove if data displayed
             reportID = report.data.REPORT_ID;
             return reportID;
         },
@@ -191,7 +198,6 @@ var scanResult = 'No results yet';
                 BARCODE_GOOD: false
             };
             jsdo.assign(updateData);
-            jsdo.saveLocal();
             jsdo.saveChanges();
             jsdo.acceptChanges();
 
