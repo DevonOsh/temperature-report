@@ -2,8 +2,7 @@
     var welcome = null,
         app = temp.app = temp.app || {},
         locationJSDO = app.locJSDO,
-        reportJSDO = app.reportJSDO,
-        lastReportID;
+        reportJSDO = app.reportJSDO;
 
     app.welcome = {
         onInit: function () {
@@ -22,27 +21,17 @@
             var reportExists,
                 reportCompleted,
                 report,
-                date = app.getDate();
-            
-            //First, assign ID of the most recently created record to lastReportID
-            lastReportID = jsdo.record.data.REPORT_ID;
-            console.log("Last report ID: " + lastReportID);
-            
-            //if there are no reports, start at 10000
-            if(lastReportID === 1) {
-                reportExists = false;
-                lastReportID = 10000;
-            }
-            //If there are reports, is there one for today?
-            else {
-                report = jsdo.find(function (jsrecord) {
-                    return (jsrecord.data.STAMP_DT == date);
-                });
+                date = app.getDate();    
 
-                if (report == null)
-                    reportExists = false;
-                else
-                    reportExists = true;
+            //Next, check to see if there are records that exist for today. If so, the report has been started
+            report = jsdo.find(function (jsrecord) {
+                return (jsrecord.data.STAMP_DT == date);
+            });
+            if (report == null) {
+                reportExists = false;
+            }
+            else {
+                reportExists = true;
             }
             
 			//Check to see if the report has been completed
@@ -52,10 +41,12 @@
                     return (jsrecord.data.STAMP_DT == date && jsrecord.data.TEMP == null);
                 });
 
-                if (report == null)
+                if (report == null) {
                     completed = true;
-                else
+                }
+                else {
                     completed = false;
+                }
                 console.log("Reported completed?: " + completed);
                 return completed;
             }
@@ -79,7 +70,6 @@
                 $("#create-report-btn").html('Begin Report');
                 $("#create-report-btn").unbind().click(function () {
                     app.welcome.createNewReport();
-                    alert("New report created!");
                     app.goToScan();
                 });
             }
@@ -94,13 +84,21 @@
                 app.tempExport.exportData();
             });
         },
-        getReportID: function () { //Creates a random ID for the current report
-            //var min = 10000,
-            //    max = 99999;
-            //return Math.floor(Math.random() * (max - min + 1)) + min;
-            
-            var currentReportID = lastReportID + 1;
-            return currentReportID;
+        getNextReportId: function () { //Use an invoke on JSDO to get the next report
+            var reportJSDO = app.reportJSDO,
+                currentReportId = "";
+
+            reportJSDO.invoke("GetNextReportId").done(
+                function(jsdo, success, request) {
+                    console.log(request.response.sReportId);
+                    currentReportId = request.response.sReportId;
+                }
+            ).fail(
+                function(jsdo, success, request){
+                    console.log(request.response);
+            });
+
+            return currentReportId;
         },
         createNewReport: function () {
             var onAfterLocationFill = app.welcome.sendReportInfo;
@@ -110,12 +108,13 @@
         },
         sendReportInfo: function (jsdo, success, request) {
             var date = app.getDate(),
-                reportID,
+                reportId,
                 onAfterFill = app.welcome.sendReportInfo;
             
             jsdo.unsubscribe('afterFill', onAfterFill);
 
-            reportID = app.welcome.getReportID();
+            //Use report JSDO invoke to get the reportID
+            reportId = app.welcome.getNextReportId();
 
             jsdo.foreach(function (location) {
                 var model = {
@@ -126,7 +125,7 @@
                     EMPLOYEE: null,
                     STAMP_DT: date,
                     STAMP_TM: null,
-                    REPORT_ID: reportID
+                    REPORT_ID: reportId
                 }
                 app.sendReport(model);
             });
